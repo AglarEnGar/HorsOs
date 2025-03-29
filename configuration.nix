@@ -6,7 +6,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ./hmconfigs/zsh.nix
+    ./zsh.nix
   ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -71,6 +71,8 @@
           enableXfwm = false;
         };
       };
+      # The special series of scripts that run before login to make sure its on
+      # the right monitor
       displayManager.lightdm = {
         enable = true;
         extraSeatDefaults = ''
@@ -90,14 +92,13 @@
           ''}
         '';
       };
+      # the goofy login menu
       displayManager.lightdm.greeters.mini = {
         enable = true;
         user = "nickd";
         extraConfig = ''
           [greeter]
           show-password-label = false
-          [greeter-theme]
-          background-image = ""
         '';
       };
       xrandrHeads = [
@@ -173,6 +174,7 @@
 
   # Find my packages
   environment.systemPackages = with pkgs; [
+    nixops
     maim
     scrot
     slop

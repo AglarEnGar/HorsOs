@@ -9,9 +9,9 @@ polybar-msg cmd quit
 	 for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
 		 if [ $m == 'DP-2' ]
 		 then
-		 	MONITOR=$m polybar --reload mexample &
+		 	MONITOR=$m polybar mexample &
 		 else
-		 	MONITOR=$m polybar --reload example &
+		 	MONITOR=$m polybar example &
 		 fi
 	 done
  else

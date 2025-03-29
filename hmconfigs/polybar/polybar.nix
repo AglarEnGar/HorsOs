@@ -59,7 +59,7 @@
 
        line-size = 1pt
 
-       border-size = 4pt
+       border-size = 3pt
        border-color = #00000000
 
        padding-left = 0
@@ -102,7 +102,7 @@
 
        line-size = 1pt
 
-       border-size = 4pt
+       border-size = 3pt
        border-color = #00000000
 
        padding-left = 0
@@ -139,23 +139,33 @@
        type = internal/tray
 
        format-margin = 8pt
-       tray-spacing = 16pt
+       tray-spacing = 12pt
 
        [module/i3ws]
        type = internal/i3
-       show-urgent = true
        pin-workspaces = true;
        index-sort = true;
 
-       label-focused = %index%
+       ws-icon-0 = 1;1
+       ws-icon-1 = 2;2
+       ws-icon-2 = 3;3
+       ws-icon-3 = 4;4
+       ws-icon-4 = 5;5
+       ws-icon-5 = 6;6
+       ws-icon-6 = 7;7
+       ws-icon-7 = 8;8
+       ws-icon-8 = 9;9
+       ws-icon-9 = 10;10
+
+       label-focused = %icon%
        label-focused-background = ''${colors.background-alt}
        label-focused-underline= ''${colors.primary}
        label-focused-padding = 1
 
-       label-visible = %index%
+       label-visible = %icon%
        label-visible-padding = 1
 
-       label-urgent = %index%
+       label-urgent = %icon%
        label-urgent-background = ''${colors.alert}
        label-urgent-padding = 1
 
@@ -163,14 +173,13 @@
       # label-separator-padding = 1
       # label-separator-foreground = #ffffff
 
-       label-unfocused = %index%
+       label-unfocused = %icon%
        label-unfocused-foreground = ''${colors.disabled}
        label-unfocused-padding = 1
 
-
        [module/xworkspaces]
        type = internal/xworkspaces
-       pin-workspaces = false
+       pin-workspaces = true
 
        label-active = %name%
        label-active-background = ''${colors.background-alt}
@@ -280,25 +289,8 @@
        ; vim:ft=dosini
     '';
     script = ''
-      # Terminate already running bar instances
-      # If all your bars have ipc enabled, you can use
-      polybar-msg cmd quit
-
-       # Wait until the processes have been shut down
-       while pgrep -u $UID -x polybar > /dev/null; do sleep 1; done
-
-       if type "xrandr"; then
-      	 for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-      		 if [ $m == 'DP-2' ]
-      		 then
-      			MONITOR=$m polybar --reload mexample &
-      		 else
-      			MONITOR=$m polybar --reload example &
-      		 fi
-      	 done
-       else
-      	 polybar --reload example &
-       fi
+      # stoopid thing dong work
+      echo "help me man"
     '';
   };
 }

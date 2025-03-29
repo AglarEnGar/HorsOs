@@ -231,8 +231,8 @@
        # exec_always --no-startup-id nitrogen --set-zoom-fill --random ~/Pictures/Wallpapers/
        exec_always --no-startup-id nitrogen --restore
 
-       # home manager starts this i think
-       # exec_always --no-startup-id sleep 2 && /home/nickd/dotfiles/hmconfigs/polybar/launch.sh
+       # home manager starts this i think I cant figure it out tho
+       exec_always --no-startup-id sleep 2 && /etc/nixos/hmconfigs/polybar/launch.sh
 
        # numlock lol
        exec_always --no-startup-id numlockx on
