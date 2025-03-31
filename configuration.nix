@@ -13,6 +13,10 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.kernelModules = ["kvm-amd"];
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
   # Drivers settings
   hardware.graphics = {
     enable = true;
@@ -174,7 +178,7 @@
 
   # Find my packages
   environment.systemPackages = with pkgs; [
-    nixops
+    nixops_unstable_full
     maim
     scrot
     slop
