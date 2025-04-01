@@ -178,6 +178,7 @@
 
   # Find my packages
   environment.systemPackages = with pkgs; [
+    qalculate-qt
     nixops_unstable_full
     maim
     scrot
