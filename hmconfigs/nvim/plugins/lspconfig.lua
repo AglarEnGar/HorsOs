@@ -50,3 +50,18 @@ local default_opts = {
 for server, opts in pairs(servers) do
   lsp[server].setup(vim.tbl_deep_extend("force", default_opts, opts))
 end
+
+-- local on_attach = function(client, bufnr)
+--   -- TRUNCATED...
+-- end
+--  
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+--  
+-- local servers = { 'clangd' }
+-- for _, lsp in ipairs(servers) do
+--     nvim_lsp[lsp].setup  {
+--         capabilities = capabilities,
+--         on_attach = on_attach,
+--     }
+-- end

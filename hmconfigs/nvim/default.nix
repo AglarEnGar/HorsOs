@@ -18,22 +18,21 @@
         type = "lua";
         config = builtins.readFile ./plugins/lspconfig.lua;
       }
-      #
-      #	# Completions
-      #	{
-      #	  plugin = nvim-cmp;
-      #	  type = "lua";
-      #	  config = builtins.readFile ./plugins/cmp.lua;
-      #	}
-      #	cmp-nvim-lsp
-      #	cmp-buffer
-      #	cmp-path
-      #	cmp_luasnip
-      #	luasnip
-      #
-      #	comment-nvim
-      #
-      #	# Formatting
+      # Completions
+      {
+        plugin = nvim-cmp;
+        type = "lua";
+        config = builtins.readFile ./plugins/cmp.lua;
+      }
+      cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
+      cmp_luasnip
+      luasnip
+
+      comment-nvim
+
+      # Formatting
       {
         plugin = conform-nvim;
         type = "lua";

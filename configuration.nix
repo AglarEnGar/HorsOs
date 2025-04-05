@@ -281,14 +281,14 @@
   };
   programs.nix-ld.enable = true;
 
-  programs.nix-ld.libraries = with pkgs; [
-    stdenv.cc.cc
-    glog
-    nix-ld
-    git
-    envfs
-    zlib
-  ];
+  #  programs.nix-ld.libraries = with pkgs; [
+  #    stdenv.cc.cc
+  #    glog
+  #    nix-ld
+  #    git
+  #    envfs
+  #    zlib
+  #  ];
 
   environment.sessionVariables = {
     TERMINAL = "kitty";
