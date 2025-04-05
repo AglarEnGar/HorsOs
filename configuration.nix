@@ -178,6 +178,11 @@
 
   # Find my packages
   environment.systemPackages = with pkgs; [
+    htop
+    clang-tools
+    llvmPackages.clangUseLLVM
+    nvtopPackages.amd
+    python3
     qalculate-qt
     nixops_unstable_full
     maim
@@ -275,6 +280,15 @@
     gamescopeSession.enable = true;
   };
   programs.nix-ld.enable = true;
+
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    glog
+    nix-ld
+    git
+    envfs
+    zlib
+  ];
 
   environment.sessionVariables = {
     TERMINAL = "kitty";
