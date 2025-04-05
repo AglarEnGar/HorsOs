@@ -72,12 +72,12 @@
       #	  type = "lua";
       #	  config = builtins.readFile ./plugins/lualine.lua;
       #}
-      # {
-      #   plugin = noice-nvim;
-      #	  type = "lua";
-      #	  config = builtins.readFile ./plugins/noice.lua;
-      #	}
-      #
+      {
+        plugin = noice-nvim;
+        type = "lua";
+        config = builtins.readFile ./plugins/noice.lua;
+      }
+      
       #	# Copilot
       #	{
       #	  plugin = copilot-lua;
@@ -102,17 +102,17 @@
       alejandra
 
       # C, C++
-      clang-tools
-      cppcheck
-      ccls
-
-      # Shell scripting
-      shfmt
-      shellcheck
-
-      # Telescope dependencies
-      ripgrep
-      fd
-    ];
-  };
-}
+--       clang-tools
+--       cppcheck
+--       ccls
+-- 
+--       # Shell scripting
+--       shfmt
+--       shellcheck
+-- 
+--       # Telescope dependencies
+--       ripgrep
+--       fd
+--     ];
+--   };
+-- }
