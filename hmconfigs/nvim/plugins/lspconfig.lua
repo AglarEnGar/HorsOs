@@ -9,7 +9,7 @@ local servers = {
       },
     },
   },
-  ccls = {},
+  clangd = {},
   lua_ls = {
     settings = {
       Lua = {
@@ -32,29 +32,29 @@ local servers = {
       },
     },
   },
+	bashls = {},
+	pyright = {},
 }
 
 local default_opts = {
-  -- capabilities = require('cmp_nvim_lsp').default_capabilities(), -- Need nvim-cmp installed for this
+	capabilities = require('cmp_nvim_lsp').default_capabilities(), -- Need nvim-cmp installed for this
   on_attach = function(_, bufnum)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {buffer=bufnum})
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, {buffer=bufnum})
-    vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, {buffer=bufnum})
+    vim.keymap.set('n', 'gD', vim.lsp.buf.type_definition, {buffer=bufnum})
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {buffer=bufnum})
+		vim.keymap.set({'n', 'v'}, '<leader>i', vim.lsp.buf.code_action, {buffer=bufnum})
     vim.keymap.set('n', '<leader>fd', '<cmd>Telescope diagnostics<cr>', {buffer=bufnum})
     vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, {buffer=bufnum})
   end,
 }
+
 
 -- Setup each server with default options
 for server, opts in pairs(servers) do
   lsp[server].setup(vim.tbl_deep_extend("force", default_opts, opts))
 end
 
--- local on_attach = function(client, bufnr)
---   -- TRUNCATED...
--- end
---  
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 --  

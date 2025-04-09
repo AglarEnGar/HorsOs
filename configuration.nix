@@ -75,6 +75,7 @@
           enableXfwm = false;
         };
       };
+
       # The special series of scripts that run before login to make sure its on
       # the right monitor
       displayManager.lightdm = {
@@ -178,6 +179,9 @@
 
   # Find my packages
   environment.systemPackages = with pkgs; [
+    gprolog
+    zoxide
+    cmake
     htop
     clang-tools
     llvmPackages.clangUseLLVM

@@ -38,8 +38,8 @@
         type = "lua";
         config = builtins.readFile ./plugins/conform.lua;
       }
-      #
-      #	# Editor
+
+      # Editor
       which-key-nvim
       #	nvim-web-devicons
       #	{
@@ -67,17 +67,17 @@
         type = "lua";
         config = "vim.cmd.colorscheme 'catppuccin'";
       }
-      #	{
-      #	  plugin = lualine-nvim;
-      #	  type = "lua";
-      #	  config = builtins.readFile ./plugins/lualine.lua;
-      #}
+      {
+        plugin = lualine-nvim;
+        type = "lua";
+        config = builtins.readFile ./plugins/lualine.lua;
+      }
       {
         plugin = noice-nvim;
         type = "lua";
         config = builtins.readFile ./plugins/noice.lua;
       }
-      
+
       #	# Copilot
       #	{
       #	  plugin = copilot-lua;
@@ -90,7 +90,7 @@
       #
       #
       #	# Misc
-      #	vimtex
+      vimtex
     ];
     #
     # All the language servers
@@ -102,17 +102,19 @@
       alejandra
 
       # C, C++
---       clang-tools
---       cppcheck
---       ccls
--- 
---       # Shell scripting
---       shfmt
---       shellcheck
--- 
---       # Telescope dependencies
---       ripgrep
---       fd
---     ];
---   };
--- }
+      clang-tools
+      cppcheck
+
+      # python
+      pyright
+
+      # Shell scripting
+      shfmt
+      shellcheck
+
+      # Telescope dependencies
+      ripgrep
+      fd
+    ];
+  };
+}
