@@ -31,6 +31,25 @@
     };
   };
 
+  # Default applications forced with mimetypes cuz vesktop dong behave
+  xdg.configFile."mimeapps.list".force = true;
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "inode/directory" = "thunar.desktop";
+      "text/html" = "firefox.desktop";
+      "x-scheme-handler/https" = "firefox.desktop"; # Links
+      "x-scheme-handler/http" = "firefox.desktop"; # Links
+      "x-scheme-handler/mailto" = "firefox.desktop"; # Links
+      "text/plain" = "vim.desktop";
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "org.libreoffice.LibreOffice.writer.desktop";
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "org.libreoffice.LibreOffice.impress.desktop";
+      "image/png" = "pinta.desktop";
+      "image/jpeg" = "pinta.desktop";
+    };
+  };
+
+  # Wallpaper auto loading
   home.file = {
     "/.config/nitrogen/bg-saved.cfg".text = ''
       [xin_1]

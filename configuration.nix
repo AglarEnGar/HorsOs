@@ -179,7 +179,7 @@
 
   # Find my packages
   environment.systemPackages = with pkgs; [
-    gprolog
+    swi-prolog
     zoxide
     cmake
     htop

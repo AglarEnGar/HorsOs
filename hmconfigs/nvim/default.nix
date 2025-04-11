@@ -32,6 +32,13 @@
 
       comment-nvim
 
+      # Grab my lines :)
+      {
+        plugin = nvim-gomove;
+        type = "lua";
+        config = builtins.readFile ./plugins/gomove.lua;
+      }
+
       # Formatting
       {
         plugin = conform-nvim;
