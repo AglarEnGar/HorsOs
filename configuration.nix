@@ -13,7 +13,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  boot.kernelModules = ["kvm-amd"];
+  boot.kernelModules = ["kvm-amd" "v4l2loopback"];
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
@@ -165,6 +165,7 @@
     description = "Nickd Dyson";
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
+      vesktop
       firefox
       xarchiver
     ];
@@ -179,16 +180,15 @@
 
   # Find my packages
   environment.systemPackages = with pkgs; [
-    swi-prolog
-    zoxide
+    nodejs
     cmake
     htop
+    wget
     clang-tools
     llvmPackages.clangUseLLVM
     nvtopPackages.amd
     python3
     qalculate-qt
-    nixops_unstable_full
     maim
     scrot
     slop
@@ -254,6 +254,7 @@
     lshw
     usbutils
     pciutils
+    zoxide
     (pkgs.wrapOBS {
       plugins = with pkgs.obs-studio-plugins; [
         obs-pipewire-audio-capture
@@ -263,10 +264,13 @@
   ];
 
   # Something else about obs
-  #  boot.extraModprobeConfig = ''
-  #    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
-  #  '';
-  #  boot.initrd.kernelModules = ["wl"];
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    v4l2loopback
+  ];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+  '';
+  # boot.initrd.kernelModules = ["wl"];
 
   # virtualization
   virtualisation.podman = {
@@ -297,6 +301,7 @@
   environment.sessionVariables = {
     TERMINAL = "kitty";
     CURSOR_THEME = "volantes_cursors";
+    BROWSER = "/etc/profiles/per-user/nickd/bin/firefox";
     EDITOR = "vim";
   };
 

@@ -30,6 +30,13 @@
       cmp_luasnip
       luasnip
 
+      # Surround my lines
+      {
+        plugin = nvim-surround;
+        type = "lua";
+        config = builtins.readFile ./plugins/surround.lua;
+      }
+
       comment-nvim
 
       # Grab my lines :)
