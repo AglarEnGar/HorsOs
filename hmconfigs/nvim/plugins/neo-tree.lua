@@ -1,11 +1,19 @@
 local nt = require("neo-tree.command")
 local wk = require("which-key")
 
+-- require("neo-tree").setup({
+-- 	filesystem = {
+-- 		window = {
+-- 			hijack_netrw_behavior = "open_current"
+-- 		}
+-- 	}
+-- })
+
 wk.add({
   {
     "<leader>fe",
     function()
-      require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
+      nt.execute({ toggle = true, dir = vim.uv.cwd() })
     end,
     desc = "Explorer NeoTree",
   },
@@ -13,14 +21,14 @@ wk.add({
   {
     "<leader>ge",
     function()
-      require("neo-tree.command").execute({ source = "git_status", toggle = true })
+      nt.execute({ source = "git_status", toggle = true })
     end,
     desc = "Git Explorer",
   },
   {
     "<leader>be",
     function()
-      require("neo-tree.command").execute({ source = "buffers", toggle = true })
+      nt.execute({ source = "buffers", toggle = true })
     end,
     desc = "Buffer Explorer",
   },

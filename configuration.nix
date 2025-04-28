@@ -205,6 +205,7 @@
     playerctl
     lxappearance
     xfce.xfce4-clipman-plugin
+    xfce.xfce4-datetime-plugin
     lightdm-gtk-greeter
     linux-manual
     man-pages
