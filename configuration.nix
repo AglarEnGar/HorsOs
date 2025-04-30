@@ -8,6 +8,7 @@
     ./hardware-configuration.nix
     ./zsh.nix
   ];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -180,6 +181,8 @@
 
   # Find my packages
   environment.systemPackages = with pkgs; [
+    git-lfs
+    calcurse
     nodejs
     cmake
     htop
@@ -205,7 +208,6 @@
     playerctl
     lxappearance
     xfce.xfce4-clipman-plugin
-    xfce.xfce4-datetime-plugin
     lightdm-gtk-greeter
     linux-manual
     man-pages

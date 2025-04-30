@@ -143,8 +143,8 @@
 
        [module/i3ws]
        type = internal/i3
-       pin-workspaces = true;
-       index-sort = true;
+       pin-workspaces = true
+       index-sort = true
 
        ws-icon-0 = 1;1
        ws-icon-1 = 2;2
