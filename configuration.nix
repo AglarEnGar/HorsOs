@@ -7,6 +7,7 @@
   imports = [
     ./hardware-configuration.nix
     ./zsh.nix
+    ./tmux.nix
   ];
 
   # Bootloader.
@@ -161,6 +162,7 @@
     };
   };
 
+  # Users
   users.users.nickd = {
     isNormalUser = true;
     description = "Nickd Dyson";
@@ -169,6 +171,32 @@
       vesktop
       firefox
       xarchiver
+    ];
+  };
+
+  # Printer setup and cofig
+  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+  services.printing.drivers = [
+    pkgs.brlaser
+    pkgs.brgenml1lpr
+    pkgs.brgenml1cupswrapper
+  ];
+  hardware.printers = {
+    ensurePrinters = [
+      {
+        name = "Brother_MFC_J6710DW";
+        location = "Home";
+        deviceUri = "usb://Brother/MFC-J6710DW?serial=BROJ1F479139";
+        model = "everywhere";
+        ppdOptions = {
+          PageSize = "A4";
+        };
+      }
     ];
   };
 
@@ -220,7 +248,6 @@
     tree
     calibre
     mangohud
-    tmux
     vscode
     libreoffice
     lsd
@@ -279,6 +306,15 @@
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;
+  };
+
+  # tmux setup
+  programs.tmux = {
+    enable = true;
+    clock24 = true;
+    extraConfig = ''      # used for less common options, intelligently combines if defined in multiple places.
+         ...
+    '';
   };
 
   # input remper
