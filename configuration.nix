@@ -7,7 +7,6 @@
   imports = [
     ./hardware-configuration.nix
     ./zsh.nix
-    ./tmux.nix
   ];
 
   # Bootloader.
@@ -278,6 +277,7 @@
     polkit_gnome
     pulseaudioFull
     vim
+    tmux
     neovim
     unrar
     unzip
@@ -306,15 +306,6 @@
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;
-  };
-
-  # tmux setup
-  programs.tmux = {
-    enable = true;
-    clock24 = true;
-    extraConfig = ''      # used for less common options, intelligently combines if defined in multiple places.
-         ...
-    '';
   };
 
   # input remper
