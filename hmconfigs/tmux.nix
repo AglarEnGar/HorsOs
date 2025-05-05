@@ -27,12 +27,19 @@
       			bind -n M-Up select-pane -U
       			bind -n M-Down select-pane -D
 
+      # switch panes using Alt-arrow without prefix
+      			bind h select-pane -L
+            unbind l
+      			bind l select-pane -R
+      			bind k select-pane -U
+      			bind j select-pane -D
+
       # Options to make tmux more pleasant
       			set -g mouse on
       			set -g default-terminal "tmux-256color"
 
       # Configure the catppuccin plugin
-      			set -g @catppuccin_flavor "mocha" # latte, frappe, macchiato, or mocha
+      			set -g @catppuccin_flavor "macchiato" # latte, frappe, macchiato, or mocha
       			set -g @catppuccin_window_status_style "basic" # basic, rounded, slanted, custom, or none
 
       # Make the status line pretty and add some modules

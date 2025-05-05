@@ -185,19 +185,19 @@
     pkgs.brgenml1lpr
     pkgs.brgenml1cupswrapper
   ];
-  hardware.printers = {
-    ensurePrinters = [
-      {
-        name = "Brother_MFC_J6710DW";
-        location = "Home";
-        deviceUri = "usb://Brother/MFC-J6710DW?serial=BROJ1F479139";
-        model = "everywhere";
-        ppdOptions = {
-          PageSize = "A4";
-        };
-      }
-    ];
-  };
+  #hardware.printers = {
+  #  ensurePrinters = [
+  #    {
+  #      name = "Brother_MFC_J6710DW";
+  #      location = "Home";
+  #      deviceUri = "usb://Brother/MFC-J6710DW?serial=BROJ1F479139";
+  #      model = "everywhere";
+  #      ppdOptions = {
+  #        PageSize = "A4";
+  #      };
+  #    }
+  #  ];
+  #};
 
   # flatpak enable
   xdg.portal = {

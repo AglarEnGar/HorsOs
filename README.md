@@ -1,5 +1,5 @@
-WM: i3
-Display Manager: xfce
+WM: i3\n
+Display Manager: xfce\n
 Bar: polybar
 drun: Rofi
 OS: Nixos

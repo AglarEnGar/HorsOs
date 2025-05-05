@@ -23,11 +23,16 @@
         }
 
         prompt {
-            enabled: false;
+            str: "";
             padding: 0;
             text-color: @foreground;
             background-color: transparent;
-            str: "";
+        }
+
+        configuration {
+            drun {
+                display-name: "";
+            }
         }
 
         window {
@@ -57,6 +62,9 @@
         textbox {
             text-color: @foreground;
             background-color: transparent;
+        }
+        textbox-prompt-colon {
+            content: "";
         }
 
         listview {
@@ -113,20 +121,22 @@
         }
 
         inputbar {
-            spacing: 0;
-            padding: 8px;
-            background-color: rgba(15, 15, 20, 0.9);
-            border: 1px;
-            border-color: #000000;
+          children: [overlay, entry];
+      		padding: 8px;
+      		background-color: rgba(15, 15, 20, 0.9);
+      		border: 1px;
+      		border-color: #000000;
         }
 
         entry {
+            placeholder: "GET TO WORK";
             spacing: 0;
             text-color: @foreground;
             background-color: transparent;
         }
 
         case-indicator {
+            enabled: false;
             spacing: 0;
             text-color: @foreground;
             background-color: transparent;
