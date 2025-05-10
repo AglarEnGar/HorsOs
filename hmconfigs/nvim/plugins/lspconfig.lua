@@ -34,6 +34,19 @@ local servers = {
   },
 	bashls = {},
 	pyright = {},
+	ts_ls = {
+		init_options = {
+			preferences = {
+				disableSuggestions = true,
+			},
+		},
+		filetypes = {
+			"javascript",
+			"typescript",
+			"javascriptreact",
+		},
+	},
+	biome = {},
 }
 
 local default_opts = {

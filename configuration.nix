@@ -14,7 +14,18 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    v4l2loopback
+  ];
   boot.kernelModules = ["kvm-amd" "v4l2loopback"];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+  '';
+  security = {
+    polkit.enable = true;
+    rtkit.enable = true;
+  };
+
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
@@ -105,6 +116,14 @@
         extraConfig = ''
           [greeter]
           show-password-label = false
+          password-alignment = middle
+
+          [greeter-theme]
+          background-image = "/etc/lightdm/IMG_0280.jpg"
+          window-color = "#AA5632"
+          font = "monospace"
+          border-color = "#000000"
+          layout-space = 10
         '';
       };
       xrandrHeads = [
@@ -276,6 +295,8 @@
     pasystray
     polkit_gnome
     pulseaudioFull
+    system-config-printer
+    webcamoid
     vim
     tmux
     neovim
@@ -293,13 +314,8 @@
     })
   ];
 
-  # Something else about obs
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    v4l2loopback
-  ];
-  boot.extraModprobeConfig = ''
-    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
-  '';
+  #programs.obs-studio.enableVirtualCamera = true;
+
   # boot.initrd.kernelModules = ["wl"];
 
   # virtualization
@@ -369,11 +385,6 @@
   programs = {
     thunar.enable = true;
     dconf.enable = true;
-  };
-
-  security = {
-    polkit.enable = true;
-    rtkit.enable = true;
   };
 
   systemd = {

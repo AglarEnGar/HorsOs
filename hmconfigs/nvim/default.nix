@@ -122,6 +122,10 @@
       # python
       pyright
 
+      # javascript and webdev
+      typescript-language-server
+      biome
+
       # Shell scripting
       shfmt
       shellcheck
