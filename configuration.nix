@@ -289,6 +289,7 @@
     ripgrep
     starship
     kitty
+    kitti3
     dmenu
     git
     networkmanagerapplet
@@ -307,6 +308,10 @@
     inetutils
     nmap
     lsof
+    wmctrl
+    mpc
+    bmon
+    wirelesstools
     usbutils
     pciutils
     zoxide

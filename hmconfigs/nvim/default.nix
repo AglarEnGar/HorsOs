@@ -52,10 +52,16 @@
         type = "lua";
         config = builtins.readFile ./plugins/conform.lua;
       }
+      {
+        plugin = nvim-treesitter;
+        type = "lua";
+        config = builtins.readFile ./plugins/treesitter.lua;
+      }
+      nvim-treesitter-parsers.yuck
 
       # Editor
       which-key-nvim
-      #	nvim-web-devicons
+      nvim-web-devicons
       #	{
       #	  plugin = flash-nvim;
       #	  type = "lua";

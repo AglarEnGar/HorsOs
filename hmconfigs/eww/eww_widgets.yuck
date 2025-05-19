@@ -19,10 +19,10 @@
 
 (defwidget favorites[]
   (box :class "favs" :orientation "v" :space-evenly false :halign "center" :valign "center"
-    (button :onclick "pcmanfm ~ &" "")
-    (button :onclick "pcmanfm ~/.config/ &" "漣")
-    (button :onclick "pcmanfm ~/Downloads &" "")
-    (button :onclick "pcmanfm ~/Pictures &" "")))
+    (button :onclick "thunar ~ &" "")
+    (button :onclick "thunar ~/.config/ &" "漣")
+    (button :onclick "thunar ~/Downloads &" "")
+    (button :onclick "thunar ~/Pictures &" "")))
 
 ;;;; Big Calendar Widget
 
@@ -48,7 +48,6 @@
           (label :style "color: #ebcb8b;" :halign "end" :text "缾")
           (label :style "color: #80a0c0;" :halign "end" :text "")
           (label :style "color: #b48ead;" :halign "end" :text "")
-          (button :style "color: #88c0d0;" :halign "end" :onclick "alacritty --class 'alacritty-float,alacritty-float' -e yay -Syu &" ""))
     
     ;; Fetch Values
     (box :orientation "v"   :class "fetch"
@@ -56,7 +55,6 @@
       (label :style "color: #ebcb8b;" :halign "start" :text ": ${wm}")
       (label :style "color: #80a0c0;" :halign "start" :text ": ${shell}")
       (label :style "color: #b48ead;" :halign "start" :text ": ${uptime}")
-      (button :style "color: #88c0d0;" :halign "start" :onclick "alacritty --class 'alacritty-float,alacritty-float' -e yay -Syu &" ": ${packages}")))))
 
 ;;;; System Information Widget
 
@@ -69,43 +67,42 @@
 
 ;;;; Random Quote Widget
 
-(defwidget quote[]
-  (box :class "quote" :orientation "v" :space-evenly false :halign "center" :valign "center"
-    (label :class "quote-text" :text "${quote_text}" :wrap true)))
+;;;;(defwidget quote[]
+;;;;  (box :class "quote" :orientation "v" :space-evenly false :halign "center" :valign "center"
+;;;;    (label :class "quote-text" :text "${quote_text}" :wrap true)))
 
 ;;;; QuickSettings widget
 
-(defwidget quicksettings []
-  (box :orientation "h" :space-evenly true :class "quicksettings" :spacing "10" :halign "center" :valign "center"
-    (button :style "color: #5e81ac;" :onclick "mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0 &" (image :path "images/camera-web.svg" :width 32 :height 32))
-    (button :style "color: #81a1c1; padding-left: 3px;" :onclick "pavucontrol &" (image :path "images/audio-headphones.svg" :width 32 :height 32))
-    (button :style "color: #b48ead;" :onclick "sh ~/.config/eww/scripts/airplane_mode.sh &" (image :path "images/network-card.svg" :width 32 :height 32))))
+;;;;(defwidget quicksettings []
+;;;;  (box :orientation "h" :space-evenly true :class "quicksettings" :spacing "10" :halign "center" :valign "center"
+;;;;    (button :style "color: #5e81ac;" :onclick "mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0 &" (image :path "images/camera-web.svg" :width 32 :height 32))
+;;;;    (button :style "color: #81a1c1; padding-left: 3px;" :onclick "pavucontrol &" (image :path "images/audio-headphones.svg" :width 32 :height 32))
 
 ;;;; AppBar widget
-(defwidget appbar []
-  (box :orientation "h" :space-evenly true :class "appbar" :spacing "5" :halign "center" :valign "center"
-    (button :style "color: #5e81ac;" :onclick "krita&" (image :path "images/krita.svg" :width 32 :height 32))
-    (button :style "color: #81a1c1;" :onclick "firefox&" (image :path "images/firefox.svg" :width 32 :height 32))
-    (button :style "color: #b48ead;" :onclick "vscodium&" (image :path "images/vscode.svg" :width 32 :height 32))
-    (button :style "color: #bf616a;" :onclick "gimp&" (image :path "images/gimp.svg" :width 32 :height 32))))
+;;;;(defwidget appbar []
+;;;;  (box :orientation "h" :space-evenly true :class "appbar" :spacing "5" :halign "center" :valign "center"
+;;;;    (button :style "color: #5e81ac;" :onclick "krita&" (image :path "images/krita.svg" :width 32 :height 32))
+;;;;    (button :style "color: #81a1c1;" :onclick "firefox&" (image :path "images/firefox.svg" :width 32 :height 32))
+;;;;    (button :style "color: #b48ead;" :onclick "vscodium&" (image :path "images/vscode.svg" :width 32 :height 32))
+;;;;    (button :style "color: #bf616a;" :onclick "gimp&" (image :path "images/gimp.svg" :width 32 :height 32))))
 
 ;;;; TODO Notes Displaying widget
 
-(defwidget notes []
-  (box :spacing 5 :class "notes" :orientation "v" :space-evenly false :halign "center" :valign "center"
-    (label :style "color: #5e81ac;" :text NOTES :halign "center" :valign "center" :wrap true :limit-width 150 :vexpand false :hexpand false)
-    (box :orientation "h"
-      (button :onclick "echo '' > ~/Documents/notes.txt" "[ Empty ]")
-      (button :onclick "pcmanfm ~/Documents/notes.txt" "[ Edit TODO ]"))))
+;;;;(defwidget notes []
+;;;;  (box :spacing 5 :class "notes" :orientation "v" :space-evenly false :halign "center" :valign "center"
+;;;;    (label :style "color: #5e81ac;" :text NOTES :halign "center" :valign "center" :wrap true :limit-width 150 :vexpand false :hexpand false)
+;;;;    (box :orientation "h"
+;;;;      (button :onclick "echo '' > ~/Documents/notes.txt" "[ Empty ]")
+;;;;      (button :onclick "pcmanfm ~/Documents/notes.txt" "[ Edit TODO ]"))))
 
 ;;;; Rofi style search
-(defwidget searchapps []
-  (eventbox :onhoverlost "eww close searchapps"
-    (box :orientation "v" :space-evenly false :class "search-win" :halign "top" :valign "top"
-      (box :orientation "h" :space-evenly false :class "searchapps-bar" :halign "top" :valign "top"
-        (label :class "search-label" :text "")
-        (input :class "search-bar" :onchange "~/.config/eww/scripts/search.sh {}"))
-      (literal :halign "center" :valign "center" :class "app-container" :content search_listen))))
+;;;;(defwidget searchapps []
+;;;;  (eventbox :onhoverlost "eww close searchapps"
+;;;;    (box :orientation "v" :space-evenly false :class "search-win" :halign "top" :valign "top"
+;;;;      (box :orientation "h" :space-evenly false :class "searchapps-bar" :halign "top" :valign "top"
+;;;;        (label :class "search-label" :text "")
+;;;;        (input :class "search-bar" :onchange "~/.config/eww/scripts/search.sh {}"))
+;;;;      (literal :halign "center" :valign "center" :class "app-container" :content search_listen))))
 
 ;;;; Rofi style powermenu
 (defwidget bigpowermenu []
@@ -132,15 +129,16 @@
   (box :orientation "v" :space-evenly false :class "network" :halign "center" :valign "center" :hexpand true :vexpand true  
     (label :class "label-control" :text "${ssid}" :halign "center" :limit-width 50 :show-truncated true :hexpand true :vexpand true)
     (box :orientation "h" :space-evenly false :class "controls" :halign "center" :valign "center" :spacing 20
-         (button :style "color: #d8dee9;" :onclick "sh ~/.config/eww/scripts/airplane_mode.sh" "")
-         (button :style "color: #e5e9f0;" :onclick "alacritty --class 'alacritty-float,alacritty-float' -e bmon &" "")
-         (button :style "color: #eceff4;" :onclick "alacritty --class 'alacritty-float,alacritty-float' -e nmtui &" "")
-         (button :style "color: #e8e8e8;" :onclick "nm-connection-editor &" ""))))
+         (button :style "color: #e5e9f0;" :onclick "kitty  -e bmon &" "")
+         (button :style "color: #eceff4;" :onclick "kitty  -e nmtui &" "")
+         (button :style "color: #e8e8e8;" :onclick "nm-connection-editor &" "") ) ) )
 
-(defwidget screenshot []
+)
 
-  (box :orientation "v" :space-evenly false :class "network" :halign "center" :valign "center" :hexpand true :vexpand true  
-    (label :class "label-control" :text "  Screenshot" :halign "center" :limit-width 50 :show-truncated true :hexpand true :vexpand true)
-    (box :orientation "h" :space-evenly false :class "controls" :halign "center" :valign "center" :spacing 20
-         (button :style "color: #d8dee9;" :onclick "eww close screenshot && ~/.config/eww/scripts/screenshot 'SCREEN'"  "")
-         (button :style "color: #e5e9f0;" :onclick "eww close screenshot && ~/.config/eww/scripts/screenshot 'SELECT'" ""))))
+;;;;(defwidget screenshot []
+;;;;
+;;;;  (box :orientation "v" :space-evenly false :class "network" :halign "center" :valign "center" :hexpand true :vexpand true  
+;;;;    (label :class "label-control" :text "  Screenshot" :halign "center" :limit-width 50 :show-truncated true :hexpand true :vexpand true)
+;;;;    (box :orientation "h" :space-evenly false :class "controls" :halign "center" :valign "center" :spacing 20
+;;;;         (button :style "color: #d8dee9;" :onclick "eww close screenshot && ~/.config/eww/scripts/screenshot 'SCREEN'"  "")
+;;;;         (button :style "color: #e5e9f0;" :onclick "eww close screenshot && ~/.config/eww/scripts/screenshot 'SELECT'" ""))))

@@ -1,6 +1,6 @@
 ;;;; QUOTE
 
-(defpoll quote_text :interval "3600s" `fortune -n 90 -s`)
+;;;; (defpoll quote_text :interval "3600s" `fortune -n 90 -s`)
 
 ;;;; FETCH AND DATE
 
@@ -10,7 +10,6 @@
 (defpoll wm :interval "12h" "wmctrl -m | grep \"Name:\" | awk '{print $2}'")
 (defpoll shell :interval "5m" "echo $SHELL | awk -F'/' '{print $NF}'")
 (defpoll uptime :interval "30s" "uptime -p | sed -e 's/up //;s/ hours,/h/;s/ minutes/m/'")
-(defpoll packages :interval "5m" "pacman -Q | wc -l")
 
 ;;;; NOTES, MUSIC, NETWORKING
 
@@ -19,4 +18,4 @@
 (defpoll ssid :interval "1s" "iwgetid -r || echo 'Disconnected'")
 
 ;;;; App list LISTEN VAR
-(defpoll search_listen :interval "1s" "cat ~/.config/eww/scripts/search_items.txt")
+;;;; (defpoll search_listen :interval "1s" "cat ~/.config/eww/scripts/search_items.txt")
