@@ -32,7 +32,6 @@ local servers = {
       },
     },
   },
-	bashls = {},
 	pyright = {},
 	ts_ls = {
 		init_options = {

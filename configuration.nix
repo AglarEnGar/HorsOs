@@ -227,11 +227,12 @@
 
   # Find my packages
   environment.systemPackages = with pkgs; [
+    qbittorrent
+    dnscrypt-proxy
     git-lfs
     calcurse
     nodejs
     cmake
-    htop
     wget
     clang-tools
     llvmPackages.clangUseLLVM
@@ -303,6 +304,9 @@
     unrar
     unzip
     lshw
+    inetutils
+    nmap
+    lsof
     usbutils
     pciutils
     zoxide
@@ -314,10 +318,6 @@
     })
   ];
 
-  #programs.obs-studio.enableVirtualCamera = true;
-
-  # boot.initrd.kernelModules = ["wl"];
-
   # virtualization
   virtualisation.podman = {
     enable = true;
@@ -327,22 +327,21 @@
   # input remper
   services.input-remapper.enable = true;
 
-  # steam setup an config
-  programs.gamemode.enable = true;
-  programs.steam = {
-    enable = true;
-    gamescopeSession.enable = true;
-  };
-  programs.nix-ld.enable = true;
+  programs = {
+    # steam setup an config
+    gamemode.enable = true;
+    steam = {
+      enable = true;
+      gamescopeSession.enable = true;
+    };
+    nix-ld.enable = true;
 
-  #  programs.nix-ld.libraries = with pkgs; [
-  #    stdenv.cc.cc
-  #    glog
-  #    nix-ld
-  #    git
-  #    envfs
-  #    zlib
-  #  ];
+    # setting up htop
+    htop = {
+      enable = true;
+      settings.show-cpu-temperature = 1;
+    };
+  };
 
   environment.sessionVariables = {
     TERMINAL = "kitty";

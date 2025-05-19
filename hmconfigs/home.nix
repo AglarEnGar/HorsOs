@@ -14,6 +14,7 @@
     ./theme.nix
     ./kitty.nix
     ./polybar/polybar.nix
+    ./eww.nix
   ];
 
   home.username = "nickd";
@@ -41,6 +42,16 @@
       "x-scheme-handler/https" = "firefox.desktop"; # Links
       "x-scheme-handler/http" = "firefox.desktop"; # Links
       "x-scheme-handler/mailto" = "firefox.desktop"; # Links
+      "application/pdf" = "firefox.desktop"; # pdfs
+
+      # Videos
+      "video/mp4" = "vlc.desktop";
+      "video/mpeg" = "vlc.desktop";
+      "video/ogg" = "vlc.desktop";
+      "video/webm" = "vlc.desktop";
+      "video/x-matroska" = "vlc.desktop";
+      "video/quicktime" = "vlc.desktop";
+
       "text/plain" = "vim.desktop";
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "org.libreoffice.LibreOffice.writer.desktop";
       "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "org.libreoffice.LibreOffice.impress.desktop";

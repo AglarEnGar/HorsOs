@@ -12,6 +12,7 @@ telescope.setup({
 	},
 })
 
+local opt = { noremap = true, silent = true }
 wk.add({
     { "<leader>T", builtin.builtin, desc = "Telescope - find picker" },
     { "<leader> ", builtin.find_files, desc = "Find file" },
@@ -23,4 +24,6 @@ wk.add({
     { "<leader>ft", builtin.treesitter, desc = "Treesitter" },
     { "<leader>fr", builtin.lsp_references, desc = "References" },
     { "<leader>fc", builtin.commands, desc = "Commands" },
+    { "<leader>fq", builtin.diagnostics, desc = "Diagnostics" },
+		{ "<leader>fn",':Telescope noice<CR>', { desc = 'Telescope Noice' } },
 })
