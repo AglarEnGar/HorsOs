@@ -52,12 +52,18 @@
         type = "lua";
         config = builtins.readFile ./plugins/conform.lua;
       }
+      nvim-treesitter-parsers.yuck
+      nvim-treesitter-parsers.c
+      nvim-treesitter-parsers.lua
+      nvim-treesitter-parsers.query
+      nvim-treesitter-parsers.nix
+      nvim-treesitter-parsers.vimdoc
+      nvim-treesitter-parsers.vim
       {
         plugin = nvim-treesitter;
         type = "lua";
         config = builtins.readFile ./plugins/treesitter.lua;
       }
-      nvim-treesitter-parsers.yuck
 
       # Editor
       which-key-nvim
