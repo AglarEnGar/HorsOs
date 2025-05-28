@@ -1,6 +1,11 @@
+$surface-darkgrey: #20252b;
+$surface-fg: #949494;
+$surface-lightgrey: #3d464e;
+$surface-grey: #2b3238;
+$surface-red: #f87070;
+
 * {
   all: unset;
-  font-family: "JetBrains Mono";
 }
 // WINDOW RELATED CSS
 .bg {
@@ -28,28 +33,56 @@ window {
 }
 
 // METRIC LOOKS
-.metric scale trough highlight {
-  all: unset;
-  color: #000000;
-  background: linear-gradient(90deg, #88c0d0 0%, #81a1c1  50%, #5E81ac 100%);
-  //border-radius: 10px;
-}
-.metric scale trough {
-  all: unset;
-  background-color: #545454;
-  //border-radius: 50px;
-  min-height: 10px;
-  min-width: 100px;
-  margin-left: 10px;
-  margin-right: 5px;
-}
-
-.metric .label {
-  color: #B48EAD;
-  font-size: 1.5rem;
-}
+//.metric scale trough highlight {
+//  all: unset;
+//  color: #000000;
+//  background: linear-gradient(90deg, #88c0d0 0%, #81a1c1  50%, #5E81ac 100%);
+//  //border-radius: 10px;
+//}
+//.metric scale trough {
+//  all: unset;
+//  background-color: #545454;
+//  //border-radius: 50px;
+//  //min-height: 10px;
+//  //min-width: 100px;
+//  //margin-left: 10px;
+//  //margin-right: 5px;
+//}
+//
+//.metric .label {
+//  color: #B48EAD;
+//  font-size: 1.5rem;
+//}
 
 // POWERMENU
+.layout-box {
+  font-family: Phosphor, Koulen;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 5em;
+  color: rgba($surface-fg, 0.8);
+}
+
+.btns-box {
+  font-size: 2.5em;
+  font-family: Phosphor, Koulen;
+
+  button {
+    padding: 0.4em;
+    border-radius: 0.1em;
+    background-color: rgba($surface-darkgrey, 0.3);
+
+    &:hover {
+      transition: 200ms linear background-color, border-radius;
+      background-color: rgba($surface-lightgrey, 0.6);
+    }
+
+    &:first-child {
+      color: rgba($surface-red, 0.8);
+    }
+  }
+}
+
 .bigpowermenu {
   font-size: 3rem;
 }

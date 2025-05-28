@@ -52,13 +52,7 @@
         type = "lua";
         config = builtins.readFile ./plugins/conform.lua;
       }
-      nvim-treesitter-parsers.yuck
-      nvim-treesitter-parsers.c
-      nvim-treesitter-parsers.lua
-      nvim-treesitter-parsers.query
-      nvim-treesitter-parsers.nix
-      nvim-treesitter-parsers.vimdoc
-      nvim-treesitter-parsers.vim
+      nvim-treesitter.withAllGrammars
       {
         plugin = nvim-treesitter;
         type = "lua";

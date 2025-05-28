@@ -62,6 +62,7 @@
       ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=cyan,bold
       ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 
+      tmux
       alias aws="aws --no-cli-pager"
       alias ls="lsd"
       eval "$(starship init zsh)"

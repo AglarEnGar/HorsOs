@@ -147,26 +147,23 @@
 ;;;;(searchapps))
 
 (defwindow bigpowermenu
+  ;; monitor 0 ;; wayland users may need this
+  :stacking "fg"
+  :windowtype "normal"
   :wm-ignore true
-  :monitor 0
-  :windowtype "dock"
-  :geometry (geometry :x "0px"
-                      :y "0%"
-                      :width "20%"
-                      :height "10%"
-                      :anchor "center center")
+  :geometry (geometry :width "100%" :height "100%")
 (bigpowermenu))
 
-(defwindow musicplayer
-  :wm-ignore true
-  :monitor 0
-  :windowtype "dock"
-  :geometry (geometry :x "0px"
-                      :y "0%"
-                      :width "20%"
-                      :height "10%"
-                      :anchor "center center")
-(musicplayer))
+;;;;(defwindow musicplayer
+;;;;  :wm-ignore true
+;;;;  :monitor 0
+;;;;  :windowtype "dock"
+;;;;  :geometry (geometry :x "0px"
+;;;;                      :y "0%"
+;;;;                      :width "20%"
+;;;;                      :height "10%"
+;;;;                      :anchor "center center")
+;;;;(musicplayer))
 
 (defwindow network
   :wm-ignore true

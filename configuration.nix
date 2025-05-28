@@ -227,6 +227,7 @@
 
   # Find my packages
   environment.systemPackages = with pkgs; [
+    blender-hip
     qbittorrent
     dnscrypt-proxy
     git-lfs
@@ -309,7 +310,7 @@
     nmap
     lsof
     wmctrl
-    mpc
+    alsa-utils
     bmon
     wirelesstools
     usbutils
