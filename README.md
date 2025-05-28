@@ -1,8 +1,9 @@
-WM: i3\n
-Display Manager: xfce\n
-Bar: polybar
-drun: Rofi
-OS: Nixos
-termanul: kitty
-text editor: neovim
-themes: catppuccin
+### My NixOS Configuration
+
+- **WM**: i3
+- **Display Manager**: xfce
+- **Bar**: polybar
+- **Application Launcher (drun)**: Rofi
+- **Terminal**: kitty
+- **Text Editor**: neovim
+- **Themes**: Catppuccin
