@@ -18,8 +18,18 @@
   boot.extraModprobeConfig = ''
     options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
   '';
-  boot.extraModulePackages = [(config.boot.kernelPackages.callPackage ./v4l2loopback-module.nix {})];
-
+  boot.extraModulePackages = [
+    # https://github.com/NixOS/nixpkgs/pull/411777
+    (config.boot.kernelPackages.v4l2loopback.overrideAttrs (old: {
+      version = "0.15.0";
+      src = pkgs.fetchFromGitHub {
+        owner = "umlaeute";
+        repo = "v4l2loopback";
+        rev = "v0.15.0";
+        sha256 = "sha256-fa3f8GDoQTkPppAysrkA7kHuU5z2P2pqI8dKhuKYh04=";
+      };
+    }))
+  ];
   security = {
     polkit.enable = true;
     rtkit.enable = true;
