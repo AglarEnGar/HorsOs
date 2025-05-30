@@ -45,6 +45,7 @@ local servers = {
 			"javascriptreact",
 		},
 	},
+	csharp_ls = {},
 	biome = {},
 }
 

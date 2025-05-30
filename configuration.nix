@@ -14,13 +14,12 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    v4l2loopback
-  ];
   boot.kernelModules = ["kvm-amd" "v4l2loopback"];
   boot.extraModprobeConfig = ''
     options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
   '';
+  boot.extraModulePackages = [(config.boot.kernelPackages.callPackage ./v4l2loopback.nix {})];
+
   security = {
     polkit.enable = true;
     rtkit.enable = true;
@@ -227,19 +226,17 @@
 
   # Find my packages
   environment.systemPackages = with pkgs; [
+    wget
     blender-hip
     qbittorrent
     dnscrypt-proxy
-    git-lfs
     calcurse
     nodejs
-    cmake
-    wget
-    clang-tools
     llvmPackages.clangUseLLVM
     nvtopPackages.amd
-    python3
     qalculate-qt
+    clang-tools
+    python3
     maim
     scrot
     slop
@@ -316,6 +313,9 @@
     usbutils
     pciutils
     zoxide
+    cmake
+    dotnet-sdk
+    dotnet-sdk
     (pkgs.wrapOBS {
       plugins = with pkgs.obs-studio-plugins; [
         obs-pipewire-audio-capture

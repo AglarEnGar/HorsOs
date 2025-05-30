@@ -121,9 +121,10 @@
       nixd
       alejandra
 
-      # C, C++
+      # C, C++, C#
       clang-tools
       cppcheck
+      csharp-ls
 
       # python
       pyright

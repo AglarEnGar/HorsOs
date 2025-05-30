@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    inputs.catppuccin.homeManagerModules.catppuccin
+    inputs.catppuccin.homeModules.catppuccin
     ./rofi.nix
     ./nvim
     ./i3configs/i3config.nix
@@ -24,6 +24,7 @@
   # git config
   programs.git = {
     enable = true;
+    lfs.enable = true;
     userName = "AglarEnGar";
     userEmail = "luca.j.morgan@gmail.com";
     extraConfig = {
