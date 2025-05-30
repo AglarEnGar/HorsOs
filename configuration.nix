@@ -18,7 +18,7 @@
   boot.extraModprobeConfig = ''
     options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
   '';
-  boot.extraModulePackages = [(config.boot.kernelPackages.callPackage ./v4l2loopback.nix {})];
+  boot.extraModulePackages = [(config.boot.kernelPackages.callPackage ./v4l2loopback-module.nix {})];
 
   security = {
     polkit.enable = true;
