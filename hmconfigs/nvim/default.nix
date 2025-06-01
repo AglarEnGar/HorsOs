@@ -36,8 +36,8 @@
         type = "lua";
         config = builtins.readFile ./plugins/surround.lua;
       }
-
       comment-nvim
+      presence-nvim
 
       # Grab my lines :)
       {

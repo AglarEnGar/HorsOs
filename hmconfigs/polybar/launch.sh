@@ -7,7 +7,7 @@ polybar-msg cmd quit
 
  if type "xrandr"; then
 	 for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-		 if [ $m == 'DP-2' ]
+		 if [ $m == 'DisplayPort-1' ]
 		 then
 		 	MONITOR=$m polybar mexample &
 		 else

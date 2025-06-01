@@ -14,27 +14,22 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # Gpu stuff
+  boot.initrd.kernelModules = ["amdgpu"];
+
   boot.kernelModules = ["kvm-amd" "v4l2loopback"];
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    v4l2loopback
+  ];
   boot.extraModprobeConfig = ''
     options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
   '';
-  boot.extraModulePackages = [
-    # https://github.com/NixOS/nixpkgs/pull/411777
-    (config.boot.kernelPackages.v4l2loopback.overrideAttrs (old: {
-      version = "0.15.0";
-      src = pkgs.fetchFromGitHub {
-        owner = "umlaeute";
-        repo = "v4l2loopback";
-        rev = "v0.15.0";
-        sha256 = "sha256-fa3f8GDoQTkPppAysrkA7kHuU5z2P2pqI8dKhuKYh04=";
-      };
-    }))
-  ];
   security = {
     polkit.enable = true;
     rtkit.enable = true;
   };
 
+  # Virt- manager and stuff
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
@@ -96,6 +91,7 @@
           enableXfwm = false;
         };
       };
+      videoDrivers = ["amdgpu"];
 
       # The special series of scripts that run before login to make sure its on
       # the right monitor
