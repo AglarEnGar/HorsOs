@@ -27,7 +27,7 @@
 ;;;; Big Calendar Widget
 
 (defwidget cal []
-  (calendar :halign "center" :valign "center" :class "cal" :month 10 :year 2021))
+  (calendar :halign "center" :valign "center" :class "cal" :month 6 :year 2025))
 
 ;;;; Small date in mm/dd/yy format
 
@@ -118,19 +118,61 @@
 
 ;;;; Rofi style powermenu
 (defwidget bigpowermenu []
- (box :class "layout-box" :space-evenly false :orientation "vertical"
-	(box :space-evenly false :hexpand true :vexpand true
-	 (_buttons :shutdown "eww close bigpowermenu & systemctl poweroff" 
-		:reboot "eww close bigpowermenu & systemctl reboot " 
-		:lock "eww close bigpowermenu & xflock4" 
-		:sleep "eww close bigpowermenu & playerctl pause & amixer set Master mute & systemctl suspend"
-		:logout "eww close bigpowermenu & i3-msg exit"
-		:shutdown_icon ""
-		:reboot_icon ""
-		:lock_icon ""
-		:sleep_token ""
-		:logout_icon "") ) ) )
+ (_buttons :shutdown "eww close bigpowermenu & systemctl poweroff" 
+	:reboot "eww close bigpowermenu & systemctl reboot " 
+	:lock "eww close bigpowermenu & xflock4" 
+	:sleep "eww close bigpowermenu & playerctl pause & amixer set Master mute & systemctl suspend"
+	:logout "eww close bigpowermenu & i3-msg exit"
+	:shutdown_icon ""
+	:reboot_icon ""
+	:lock_icon ""
+	:sleep_token ""
+	:logout_icon "") )
 
+;; Define a custom widget for the power menu
+(defwidget powermenu []
+  (box :class "powermenu-container"
+       :orientation "v"
+       :space-evenly false
+       :halign "center"
+       :valign "center"
+    (label :class "powermenu-title" :text "Power Options")
+    (box :class "button-grid"
+         :orientation "h"
+         :space-evenly true
+         :halign "center"
+         :valign "center"
+      (button :class "power-button shutdown"
+              :onclick "systemctl poweroff & eww close powermenu"
+        (box :orientation "v" :space-evenly false
+          (label :text "⏻" :class "icon")
+          (label :text "Shutdown" :class "label")))
+      (button :class "power-button reboot"
+              :onclick "systemctl reboot & eww close powermenu"
+        (box :orientation "v" :space-evenly false
+          (label :text "↻" :class "icon")
+          (label :text "Reboot" :class "label")))
+      (button :class "power-button logout"
+              :onclick "i3-msg exit & eww close powermenu"
+        (box :orientation "v" :space-evenly false
+          (label :text "" :class "icon") ;; Font Awesome logout icon
+          (label :text "Logout" :class "label")))
+      (button :class "power-button suspend"
+              :onclick "eww close powermenu & playerctl pause & amixer set Master mute & systemctl suspend"
+        (box :orientation "v" :space-evenly false
+          (label :text "" :class "icon") ;; Font Awesome moon icon
+          (label :text "Suspend" :class "label")))
+      (button :class "power-button lock"
+              :onclick "eww close bigpowermenu & xflock4"
+        (box :orientation "v" :space-evenly false
+          (label :text "" :class "icon") ;; Font Awesome lock icon
+          (label :text "Lock" :class "label")))
+    )
+    (button :class "cancel-button"
+            :onclick "eww close powermenu"
+            "Cancel")
+  )
+)
 
 ;;;; Music Player
 ;;;;(defwidget musicplayer []

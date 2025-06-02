@@ -2,7 +2,23 @@
   pkgs,
   config,
   ...
-}: {
+}: let
+  # Thanks varun!
+  powerMenuScript = name: rofiPkg:
+    pkgs.writeShellScriptBin name ''
+      MENU="$(echo "Lock|Suspend|Logout|Reboot|Shutdown" | ${rofiPkg}/bin/rofi -sep "|" -dmenu -i -p '󰐥' -lines 5)"
+      case "$MENU" in
+        *Lock) loginctl lock-session $XDG_SESSION_ID ;;
+        *Suspend) systemctl suspend ;;
+        *Logout) loginctl kill-session $XDG_SESSION_ID;;
+        *Reboot) systemctl reboot ;;
+        *Shutdown) systemctl -i poweroff
+      esac
+    '';
+in {
+  home.packages = [
+    (powerMenuScript "rofi-power-menu" pkgs.rofi)
+  ];
   home.file = {
     ".config/rofi/config.rasi".text = ''
       * {

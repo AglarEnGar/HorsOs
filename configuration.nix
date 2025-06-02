@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   inputs,
   ...
@@ -17,13 +18,27 @@
   # Gpu stuff
   boot.initrd.kernelModules = ["amdgpu"];
 
-  boot.kernelModules = ["kvm-amd" "v4l2loopback"];
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    v4l2loopback
-  ];
-  boot.extraModprobeConfig = ''
-    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
-  '';
+  programs.obs-studio = {
+    enable = true;
+    package = pkgs.obs-studio.overrideAttrs (old: {
+      src = pkgs.fetchFromGitHub {
+        owner = "obsproject";
+        repo = "obs-studio";
+        rev = "31.1.0-beta1";
+        hash = "sha256-IjhHi+M2tsqOWuh8n7hoOcDSbi0rjp7YNNm/VEz45vQ="; # fill this in when you get a build failure
+      };
+      patches = [
+        ./fix-nix-plugins.patch
+      ];
+    });
+    plugins = with pkgs.obs-studio-plugins; [
+      obs-pipewire-audio-capture
+      obs-vkcapture
+    ];
+    enableVirtualCamera = true;
+  };
+
+  boot.kernelModules = ["kvm-amd"];
   security = {
     polkit.enable = true;
     rtkit.enable = true;
@@ -104,13 +119,13 @@
             while [ ! -e /tmp/.X11-unix/X0 ]; do sleep 0.1; done
 
             # Set primary display (replace HDMI-1 with your actual primary monitor)
-            ${pkgs.xorg.xrandr}/bin/xrandr --output DP-2 --primary
+            ${pkgs.xorg.xrandr}/bin/xrandr --output DisplayPort-1 --primary
 
             # Disable other displays (replace DP-1 with your secondary monitor)
-            ${pkgs.xorg.xrandr}/bin/xrandr --output DP-1 --off
+            ${pkgs.xorg.xrandr}/bin/xrandr --output DisplayPort-0 --off
 
             # Disable other displays (replace DP-1 with your secondary monitor)
-            ${pkgs.xorg.xrandr}/bin/xrandr --output HDM1-2 --off
+            ${pkgs.xorg.xrandr}/bin/xrandr --output HDM1-A-1 --off
           ''}
         '';
       };
@@ -322,12 +337,6 @@
     cmake
     dotnet-sdk
     dotnet-sdk
-    (pkgs.wrapOBS {
-      plugins = with pkgs.obs-studio-plugins; [
-        obs-pipewire-audio-capture
-        obs-vkcapture
-      ];
-    })
   ];
 
   # virtualization

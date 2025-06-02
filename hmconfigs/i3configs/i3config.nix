@@ -26,9 +26,6 @@
          # text rendering and scalability on retina/hidpi displays (thanks to pango).
          #font pango:DejaVu Sans Mono 8
 
-         # Reboot all monitors to default full profile
-         			exec --no-startup-id autorandr fulldesktop
-
          # Start XDG autostart .desktop files using dex. See also
          # https://wiki.archlinux.org/index.php/XDG_Autostart
          			exec --no-startup-id dex --autostart --environment i3
