@@ -10,7 +10,7 @@
   :monitor 0
   :windowtype "desktop"
   :geometry (geometry :x "0%"
-                      :y "30px"
+                      :y "40px"
                       :width "480"
                       :height "320"
                       :anchor "center top")

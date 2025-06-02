@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ./zsh.nix
   ];
+  nix.settings.warn-dirty = false;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -25,11 +26,13 @@
         owner = "obsproject";
         repo = "obs-studio";
         rev = "31.1.0-beta1";
-        hash = "sha256-IjhHi+M2tsqOWuh8n7hoOcDSbi0rjp7YNNm/VEz45vQ="; # fill this in when you get a build failure
+        hash = "sha256-7RjE5gVinj3HlNSEwegmq64O8luQSgTV3UEZ26a7uHQ="; # fill this in when you get a build failure
+        fetchSubmodules = true;
       };
       patches = [
-        ./fix-nix-plugins.patch
+        ./fix-nix-plugin-path.patch
       ];
+      nativeBuildInputs = old.nativeBuildInputs ++ [pkgs.extra-cmake-modules];
     });
     plugins = with pkgs.obs-studio-plugins; [
       obs-pipewire-audio-capture
@@ -295,7 +298,6 @@
     gnumake
     pinta
     volantes-cursors
-    volantes-cursors
     gcc
     wineWowPackages.stable
     jq
@@ -335,7 +337,7 @@
     pciutils
     zoxide
     cmake
-    dotnet-sdk
+    xorg.xmodmap
     dotnet-sdk
   ];
 

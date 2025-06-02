@@ -29,10 +29,6 @@
 (defwidget cal []
   (calendar :halign "center" :valign "center" :class "cal" :month 6 :year 2025))
 
-;;;; Small date in mm/dd/yy format
-
-(defwidget smalldate []
-  (label :class "small-date" :valign "center" :halign "center" :text TODAY))
 
 ;;;; User information fetch widget
 

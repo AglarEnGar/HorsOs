@@ -4,12 +4,16 @@
 
 ;;;; FETCH AND DATE
 
-(defpoll TODAY :interval "1s" `date +%m/%d/%y`)
 (defpoll distro :interval "12h" "awk '/^ID=/' /etc/*-release | awk -F'=' '{ print tolower($2) }'")
 (defpoll de :interval "12h" "echo $XDG_CURRENT_DESKTOP")
 (defpoll wm :interval "12h" "wmctrl -m | grep \"Name:\" | awk '{print $2}'")
 (defpoll shell :interval "5m" "echo $SHELL | awk -F'/' '{print $NF}'")
-(defpoll uptime :interval "30s" "uptime -p | sed -e 's/up //;s/ hours,/h/;s/ minutes/m/'")
+
+(defpoll    panel_clock :interval "1s" `date "+%I:%M %p  |  %d/%m/%y"`)
+(defpoll    hour        :interval "1s" `date "+%I"`)
+(defpoll    minutes     :interval "1s" `date "+%M"`)
+(defpoll    date        :interval "1s" `date "+%A %d %B"`)
+(defpoll    uptime      :interval "60s" "uptime | awk '{print $3}' | tr ',' ' '")
 
 ;;;; NOTES, MUSIC, NETWORKING
 

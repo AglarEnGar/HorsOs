@@ -76,13 +76,13 @@
          			bindsym $mod+Shift+f exec --no-startup-id "thunar"
          # Open browser
          			bindsym $mod+b exec --no-startup-id "firefox"
+         # Open powermenu
+              bindsym Control+mod1+Delete exec --no-startup-id rofi-power-menu
 
          # kill focused window
          			bindsym $mod+q kill
          # bindsym $mod+p exec --no-startup-id "~/.config/rofi/powermenu/type-1/powermenu.sh"
 
-         # start dmenu (a program launcher)
-         # bindsym $mod+d exec --no-startup-id dmenu_run
          # A more modern dmenu replacement is rofi:
          			bindcode $mod+40 exec --no-startup-id rofi -show drun -show-icons
 
