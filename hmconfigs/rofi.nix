@@ -6,11 +6,11 @@
   # Thanks varun!
   powerMenuScript = name: rofiPkg:
     pkgs.writeShellScriptBin name ''
-      MENU="$(echo "Lock|Suspend|Logout|Reboot|Shutdown" | ${rofiPkg}/bin/rofi -sep "|" -dmenu -i -p '󰐥' -lines 5)"
+      MENU="$(echo "Lock|Suspend|Logout|Reboot|Shutdown" | ${rofiPkg}/bin/rofi -sep "|" -dmenu -i -p '󰐥' -lines 5 -theme-str 'inputbar { enabled: false; }' )"
       case "$MENU" in
-        *Lock) loginctl lock-session $XDG_SESSION_ID ;;
-        *Suspend) systemctl suspend ;;
-        *Logout) loginctl kill-session $XDG_SESSION_ID;;
+        *Lock) xflock4;;
+        *Suspend) playerctl pause & amixer set Master mute & systemctl suspend;;
+        *Logout) i3-msg exit;;
         *Reboot) systemctl reboot ;;
         *Shutdown) systemctl -i poweroff
       esac

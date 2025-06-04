@@ -10,11 +10,11 @@
   :monitor 0
   :windowtype "desktop"
   :geometry (geometry :x "0%"
-                      :y "40px"
-                      :width "480"
-                      :height "320"
+                      :y "50px"
+                      :width "480px"
+                      :height "200px"
                       :anchor "center top")
-(cal))
+(calendar_widget))
 
 (defwindow bigpowermenu
   :wm-ignore false

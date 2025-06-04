@@ -124,7 +124,8 @@
       # C, C++, C#
       clang-tools
       cppcheck
-      csharp-ls
+      ccls
+      omnisharp-roslyn
 
       # python
       pyright

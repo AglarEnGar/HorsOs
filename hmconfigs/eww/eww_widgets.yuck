@@ -25,9 +25,19 @@
     (button :onclick "thunar ~/Pictures &" "")))
 
 ;;;; Big Calendar Widget
+(defwidget calendar_widget []
+  (box
+    :class "calendar-container"
+    (calendar
+      :name "my_calendar"
+      :show-heading true
+      :show-day-names true
+    )
+  )
+)
 
-(defwidget cal []
-  (calendar :halign "center" :valign "center" :class "cal" :month 6 :year 2025))
+;;(defwidget cal []
+	;;(calendar :halign "center" :valign "center" :class "cal" :show-details true))
 
 
 ;;;; User information fetch widget

@@ -270,12 +270,10 @@
        [module/date]
        type = internal/date
        interval = 1
-
-       date-alt = %H:%M
        date = %Y-%m-%d %H:%M:%S
-
-       label = %date%
        label-foreground = ''${colors.primary}
+       format = <label>
+       label = "%{A1:eww open --toggle calender:}%date%%{A}"
 
        [module/popup_trigger]
        type = custom/text

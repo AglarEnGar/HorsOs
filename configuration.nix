@@ -338,7 +338,6 @@
     zoxide
     cmake
     xorg.xmodmap
-    dotnet-sdk
   ];
 
   # virtualization
