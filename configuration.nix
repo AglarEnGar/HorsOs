@@ -68,6 +68,7 @@
     hostName = "HorsOs";
     networkmanager.enable = true;
   };
+  programs.traceroute.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
@@ -207,7 +208,7 @@
   users.users.nickd = {
     isNormalUser = true;
     description = "Nickd Dyson";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "wireshark"];
     packages = with pkgs; [
       vesktop
       firefox
@@ -250,6 +251,8 @@
 
   # Find my packages
   environment.systemPackages = with pkgs; [
+    gsimplecal
+    dotnetCorePackages.sdk_9_0-bin
     wget
     blender-hip
     qbittorrent
@@ -296,7 +299,7 @@
     protonup-qt
     gparted
     gnumake
-    pinta
+    krita
     volantes-cursors
     gcc
     wineWowPackages.stable
@@ -326,12 +329,14 @@
     unrar
     unzip
     lshw
-    inetutils
+    traceroute
+    dig
     nmap
     lsof
     wmctrl
     alsa-utils
     bmon
+    mlocate
     wirelesstools
     usbutils
     pciutils
@@ -339,6 +344,18 @@
     cmake
     xorg.xmodmap
   ];
+
+  services.udev = {
+    extraRules = ''
+      SUBSYSTEM=="dumpcap", GROUP="wireshark", MODE="0640"
+    '';
+  };
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark;
+    dumpcap.enable = true;
+    usbmon.enable = true;
+  };
 
   # virtualization
   virtualisation.podman = {

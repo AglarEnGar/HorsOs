@@ -61,8 +61,8 @@ local default_opts = {
   end,
 }
 
-vim.lsp.enable({'nixd', 'clangd', 'lua_ls', 'pyright', 'bashls', 'ts_ls', 'biome', 'omnisharp'})
 -- Setup each server with default options
+vim.lsp.enable({'nixd', 'ccls', 'lua_ls', 'pyright', 'bashls', 'ts_ls', 'biome', 'omnisharp', 'cmake'})
 --for server, opts in pairs(servers) do
 --	vim.lsp.config('*', {
 --		vim.tbl_deep_extend("force", default_opts, opts)
@@ -71,17 +71,28 @@ vim.lsp.enable({'nixd', 'clangd', 'lua_ls', 'pyright', 'bashls', 'ts_ls', 'biome
 
 vim.lsp.config('*', {
 	capabilities = require('cmp_nvim_lsp').default_capabilities(), -- Need nvim-cmp installed for this
-	on_attach = function(_, bufnum)
-		vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {buffer=bufnum})
-		vim.keymap.set('n', 'K', vim.lsp.buf.hover, {buffer=bufnum})
-		vim.keymap.set('n', 'gD', vim.lsp.buf.type_definition, {buffer=bufnum})
-		vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {buffer=bufnum})
-		vim.keymap.set({'n', 'v'}, '<leader>i', vim.lsp.buf.code_action, {buffer=bufnum})
-		vim.keymap.set('n', '<leader>fd', '<cmd>Telescope diagnostics<cr>', {buffer=bufnum})
-		vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, {buffer=bufnum})
-	end,
 })
 
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+
+		vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {buffer=args.buf})
+		vim.keymap.set('n', 'K', vim.lsp.buf.hover, {buffer=args.buf})
+		vim.keymap.set('n', 'gD', vim.lsp.buf.type_definition, {buffer=args.buf})
+		if client:supports_method('textDocument/implementation') then
+      -- Create a keymap for vim.lsp.buf.implementation ...
+			vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {buffer=args.buf})
+    end
+		vim.keymap.set({'n', 'v'}, '<leader>i', vim.lsp.buf.code_action, {buffer=args.buf})
+		vim.keymap.set('n', '<leader>fd', '<cmd>Telescope diagnostics<cr>', {buffer=args.buf})
+		vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, {buffer=args.buf})
+  end,
+})
+
+--vim.lsp.config('clangd', {
+--	filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
+--})
 vim.lsp.config('nixd', {
 	cmd = {"nixd"},
 	settings = {

@@ -56,8 +56,10 @@
       "text/plain" = "vim.desktop";
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "org.libreoffice.LibreOffice.writer.desktop";
       "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "org.libreoffice.LibreOffice.impress.desktop";
-      "image/png" = "pinta.desktop";
-      "image/jpeg" = "pinta.desktop";
+
+      # Pictures
+      "image/png" = "krita_png.desktop";
+      "image/jpeg" = "krita_jpeg.desktop";
     };
   };
 

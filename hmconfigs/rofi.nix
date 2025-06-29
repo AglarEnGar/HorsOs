@@ -10,7 +10,7 @@
       case "$MENU" in
         *Lock) xflock4;;
         *Suspend) playerctl pause & amixer set Master mute & systemctl suspend;;
-        *Logout) i3-msg exit;;
+        *Logout) xfce4-session-logout --logout;;
         *Reboot) systemctl reboot ;;
         *Shutdown) systemctl -i poweroff
       esac

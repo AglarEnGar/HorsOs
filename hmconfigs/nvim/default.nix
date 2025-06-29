@@ -122,6 +122,7 @@
       alejandra
 
       # C, C++, C#
+      cmake-language-server
       clang-tools
       cppcheck
       ccls

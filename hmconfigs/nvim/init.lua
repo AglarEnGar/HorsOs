@@ -69,7 +69,12 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- Switch source and header
 local opt = { noremap = true, silent = true }
-vim.keymap.set('n', '<M-o>', function() vim.cmd('ClangdSwitchSourceHeader') end, opt)
+-- For Clang
+--vim.keymap.set('n', '<M-o>', function() vim.cmd('LspClangdSwitchSourceHeader') end, opt)
+-- For ccls
+vim.keymap.set('n', '<M-o>', function() vim.cmd('LspCclsSwitchSourceHeader') end, opt)
+
+
 
 -- Keybinds to make split navigation easier.
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
