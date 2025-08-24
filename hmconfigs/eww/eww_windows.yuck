@@ -8,7 +8,7 @@
 (defwindow calendar
   :wm-ignore: true
   :monitor 0
-  :windowtype "desktop"
+  :windowtype "normal"
   :geometry (geometry :x "0%"
                       :y "50px"
                       :width "480px"

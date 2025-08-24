@@ -242,6 +242,8 @@
   #  ];
   #};
 
+  services.mullvad-vpn.enable = true;
+
   # flatpak enable
   xdg.portal = {
     enable = true;
@@ -251,7 +253,13 @@
 
   # Find my packages
   environment.systemPackages = with pkgs; [
-    gsimplecal
+    mullvad-vpn
+    cataclysm-dda-git
+    libsForQt5.xp-pen-deco-01-v2-driver
+    tasktimer
+    whois
+    r2modman
+    tor-browser
     dotnetCorePackages.sdk_9_0-bin
     wget
     blender-hip
@@ -343,6 +351,7 @@
     zoxide
     cmake
     xorg.xmodmap
+    inxi
   ];
 
   services.udev = {
@@ -373,7 +382,9 @@
       enable = true;
       gamescopeSession.enable = true;
     };
-    nix-ld.enable = true;
+    nix-ld = {
+      enable = true;
+    };
 
     # setting up htop
     htop = {

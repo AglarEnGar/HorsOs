@@ -30,6 +30,7 @@
     :class "calendar-container"
     (calendar
       :name "my_calendar"
+			:show-details true
       :show-heading true
       :show-day-names true
     )

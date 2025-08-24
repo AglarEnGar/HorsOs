@@ -54,8 +54,8 @@
       "video/quicktime" = "vlc.desktop";
 
       "text/plain" = "vim.desktop";
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "org.libreoffice.LibreOffice.writer.desktop";
-      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "org.libreoffice.LibreOffice.impress.desktop";
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "writer.desktop";
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "impress.desktop";
 
       # Pictures
       "image/png" = "krita_png.desktop";
