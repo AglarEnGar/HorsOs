@@ -253,6 +253,7 @@
 
   # Find my packages
   environment.systemPackages = with pkgs; [
+    godot
     mullvad-vpn
     cataclysm-dda-git
     libsForQt5.xp-pen-deco-01-v2-driver

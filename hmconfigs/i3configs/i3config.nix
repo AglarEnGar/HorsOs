@@ -94,8 +94,13 @@
          # .desktop file. It is a wrapper around dmenu, so you need that installed.
          # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
          # Screenshot:
-         			bindsym Print exec --no-startup-id scrot -d 2 -q 100 -F ~/Pictures/screenshot_$(date +"%Y-%m-%d_%H-%M-%S").png
+         bindsym Print exec --no-startup-id scrot -d 2 -q 100 -F ~/Pictures/screenshot_$(date +"%Y-%m-%d_%H-%M-%S").png
+         bindsym Shift+Print exec --no-startup-id xfce4-screenshooter -r -c --save Pictures
 
+         # The clipboard
+         bindsym $mod+Shift+v exec --no-startup-id xfce4-popup-clipman
+         # player pause
+          bindsym Pause exec --no-startup-id playerctl play-pause
          # change focus
          			bindsym $mod+h focus left
          			bindsym $mod+j focus down

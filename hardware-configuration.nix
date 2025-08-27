@@ -17,18 +17,18 @@
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/2de73410-a5a7-4905-8e5d-798a39bd86d4";
+    device = "/dev/disk/by-uuid/6797506c-7f3b-4da7-9787-a373ce949363";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/2D65-B26B";
+    device = "/dev/disk/by-uuid/62D6-459A";
     fsType = "vfat";
     options = ["fmask=0077" "dmask=0077"];
   };
 
   swapDevices = [
-    {device = "/dev/disk/by-uuid/a9bf54e8-e4fa-4024-a75f-d9305f993d43";}
+    {device = "/dev/disk/by-uuid/4b669a2a-11cd-4f44-9948-9be414f1d239";}
   ];
 
   # the lil 500g notebook
@@ -40,6 +40,12 @@
       # boot options for fstab. Search up fstab mount options you can use
       "nofail" # Prevent system from failing if this drive doesn't mount
     ];
+  };
+
+  # the old drive
+  fileSystems."/mnt/old" = {
+    device = "/dev/disk/by-uuid/2de73410-a5a7-4905-8e5d-798a39bd86d4";
+    fsType = "ext4";
   };
 
   # the reaper drive
