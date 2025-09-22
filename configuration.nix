@@ -69,6 +69,17 @@
     networkmanager.enable = true;
   };
   programs.traceroute.enable = true;
+  services.resolved.enable = true;
+  programs.ssh = {
+    startAgent = true;
+  };
+  services.openssh = {
+    enable = true;
+    settings = {
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
@@ -253,6 +264,7 @@
 
   # Find my packages
   environment.systemPackages = with pkgs; [
+    unixtools.nettools
     godot
     mullvad-vpn
     cataclysm-dda-git
