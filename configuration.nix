@@ -75,6 +75,7 @@
   };
   services.openssh = {
     enable = true;
+    ports = [5432];
     settings = {
       KbdInteractiveAuthentication = false;
       PermitRootLogin = "no";
@@ -236,8 +237,6 @@
   };
   services.printing.drivers = [
     pkgs.brlaser
-    pkgs.brgenml1lpr
-    pkgs.brgenml1cupswrapper
   ];
   #hardware.printers = {
   #  ensurePrinters = [

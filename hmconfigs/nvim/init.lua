@@ -74,7 +74,8 @@ local opt = { noremap = true, silent = true }
 -- For ccls
 vim.keymap.set('n', '<M-o>', function() vim.cmd('LspCclsSwitchSourceHeader') end, opt)
 
-
+-- make format on write off by default
+vim.g.disable_autoformat = true
 
 -- Keybinds to make split navigation easier.
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
