@@ -77,6 +77,7 @@
     enable = true;
     ports = [5432];
     settings = {
+			PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
       PermitRootLogin = "no";
     };
@@ -226,6 +227,10 @@
       firefox
       xarchiver
     ];
+		openssh.authorizedKeys.keys = [
+			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHmdKF4/iYZFKSVXlJUl/6o6K9lF9ul3ToKp450mSYmU luca.j.morgan@gmail.com" # laptop
+			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO9oYLYzCVdTnxWcT7oZWhJYU/xNNAfGyzkapJxK4n3s u0_a390@localhost" # phone
+		];
   };
 
   # Printer setup and cofig
