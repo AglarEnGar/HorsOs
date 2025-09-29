@@ -21,6 +21,7 @@
       specialArgs = {inherit inputs;};
       modules = [
         ./configuration.nix
+				inputs.catppuccin.nixosModules.catppuccin
         inputs.home-manager.nixosModules.default
       ];
     };

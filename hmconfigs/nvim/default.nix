@@ -13,11 +13,18 @@
     extraLuaConfig = builtins.readFile ./init.lua;
 
     plugins = with pkgs.vimPlugins; [
+      # evil lsp config
+      {
+        plugin = nvim-java;
+        type = "lua";
+        config = builtins.readFile ./plgins/java.lua;
+      }
       {
         plugin = nvim-lspconfig;
         type = "lua";
         config = builtins.readFile ./plugins/lspconfig.lua;
       }
+
       # Completions
       {
         plugin = nvim-cmp;

@@ -1,12 +1,19 @@
 {
   pkgs,
   config,
+	lib,
   ...
 }: {
+	catppuccin = {
+		enable = true;
+		accent = "lavender";
+		flavor = "macchiato";
+	};
+
   gtk = {
     enable = true;
-
-    iconTheme = {
+	
+    iconTheme = lib.mkForce {
       name = "Numix-Circle";
       package = pkgs.numix-icon-theme-circle;
     };
@@ -17,20 +24,21 @@
     };
 
     gtk3.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
+        gtk-application-prefer-dark-theme= true;
     };
 
     gtk4.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
+        gtk-application-prefer-dark-theme= true;
     };
+
   };
-  catppuccin.gtk = {
+
+  # Force qt to mimic configured gtk theme
+  qt = {
     enable = true;
-    accent = "lavender";
-    flavor = "macchiato";
+		style.name = "kvantum";
+    platformTheme.name = "kvantum";
   };
+
+
 }

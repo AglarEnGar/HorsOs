@@ -62,7 +62,7 @@ local default_opts = {
 }
 
 -- Setup each server with default options
-vim.lsp.enable({'nixd', 'ccls', 'lua_ls', 'pyright', 'bashls', 'ts_ls', 'biome', 'omnisharp', 'cmake'})
+vim.lsp.enable({'nixd', 'ccls', 'lua_ls', 'pyright', 'bashls', 'ts_ls', 'biome', 'omnisharp', 'cmake', 'jdtls'})
 --for server, opts in pairs(servers) do
 --	vim.lsp.config('*', {
 --		vim.tbl_deep_extend("force", default_opts, opts)
@@ -133,6 +133,37 @@ vim.lsp.config('ts_ls', {
 		"javascript",
 		"typescript",
 		"javascriptreact",
+	},
+})
+vim.lsp.config('jdlts', {
+	cmd = {
+		'nix',
+		'develop',
+		'--command',
+		'jdtls',
+	},
+
+	init_options = {
+		settings = {
+			java = {
+				imports = {
+					gradle = {
+						enabled = true,
+						wrapper = {
+							enabled = true,
+							-- Note the nested table here. This is really important.
+							-- `checksums` is an array of objects, which in lua translates to a table of tables.
+							checksums = {
+								{
+									sha256 = '7d3a4ac4de1c32b59bc6a4eb8ecb8e612ccd0cf1ae1e99f66902da64df296172',
+									allowed = true,
+								},
+							},
+						},
+					},
+				},
+			},
+		},
 	},
 })
 

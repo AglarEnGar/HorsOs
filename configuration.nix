@@ -268,7 +268,9 @@
 
   # Find my packages
   environment.systemPackages = with pkgs; [
-    unixtools.nettools
+		gitFull
+		blender-hip
+		net-tools
     godot
     mullvad-vpn
     cataclysm-dda-git
@@ -279,7 +281,6 @@
     tor-browser
     dotnetCorePackages.sdk_9_0-bin
     wget
-    blender-hip
     qbittorrent
     dnscrypt-proxy
     calcurse
