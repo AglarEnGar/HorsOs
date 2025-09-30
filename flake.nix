@@ -21,16 +21,6 @@
         ./configuration.nix
         inputs.catppuccin.nixosModules.catppuccin
         inputs.home-manager.nixosModules.home-manager
-
-        {
-          # if you use home-manager
-          home-manager.users.nickd = {
-            imports = [
-              ./hmconfigs/home.nix
-              inputs.catppuccin.homeModules.catppuccin
-            ];
-          };
-        }
       ];
     };
   };

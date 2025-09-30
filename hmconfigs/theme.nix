@@ -1,13 +1,12 @@
 {
   pkgs,
   config,
-  lib,
   ...
 }: {
   gtk = {
     enable = true;
 
-    iconTheme = lib.mkForce {
+    iconTheme = {
       name = "Numix-Circle";
       package = pkgs.numix-icon-theme-circle;
     };
@@ -17,27 +16,21 @@
       name = "volantes_cursors";
     };
 
-    # theme = {
-    #   name = "Catppuccin-Macchiato-Lavender";
-    #   package = pkgs.catppuccin-gtk.override {
-    #     accents = ["lavender"];
-    #     variant = "macchiato";
-    #     tweaks = ["rimless" "black"];
-    #   };
-    # };
-
     gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
     };
 
     gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
     };
   };
-
-  # xdg.configFile = {
-  #   "gtk-4.0/assets".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/assets";
-  #   "gtk-4.0/gtk.css".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk.css";
-  #   "gtk-4.0/gtk-dark.css".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk-dark.css";
-  # };
+  catppuccin.gtk = {
+    enable = true;
+    accent = "lavender";
+    flavor = "macchiato";
+  };
 }

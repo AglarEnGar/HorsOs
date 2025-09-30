@@ -274,7 +274,7 @@
     godot
     mullvad-vpn
     cataclysm-dda-git
-    libsForQt5.xp-pen-deco-01-v2-driver
+    # libsForQt5.xp-pen-deco-01-v2-driver
     tasktimer
     whois
     r2modman
