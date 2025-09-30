@@ -82,5 +82,12 @@
       bgcolor=#000000
     '';
   };
+
+  catppuccin = {
+    enable = true;
+    accent = "lavender";
+    flavor = "macchiato";
+  };
+
   programs.home-manager.enable = true;
 }

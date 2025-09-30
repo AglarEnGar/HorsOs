@@ -14,11 +14,12 @@
 
     plugins = with pkgs.vimPlugins; [
       # evil lsp config
-      {
-        plugin = nvim-java;
-        type = "lua";
-        config = builtins.readFile ./plgins/java.lua;
-      }
+      # {
+      #   plugin = nvim-java;
+      #   type = "lua";
+      #   config = builtins.readFile ./plugins/java.lua;
+      # }
+
       {
         plugin = nvim-lspconfig;
         type = "lua";
