@@ -16,6 +16,12 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # kernel shitfuckery
+  boot.kernelParams = [
+    "quiet"
+    "libahci.ignore_sss=1"
+  ];
+
   # Gpu stuff
   boot.initrd.kernelModules = ["amdgpu"];
 

@@ -70,6 +70,12 @@
       # Editor
       which-key-nvim
       nvim-web-devicons
+			{
+			 plugin = todo-comments-nvim;
+			 type = "lua";
+			 config = builtins.readFile ./plugins/todos.lua;
+			}
+
       #	{
       #	  plugin = flash-nvim;
       #	  type = "lua";
@@ -90,6 +96,8 @@
         type = "lua";
         config = builtins.readFile ./plugins/telescope.lua;
       }
+
+			# decoration
       {
         plugin = catppuccin-nvim;
         type = "lua";
