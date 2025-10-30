@@ -11,13 +11,13 @@ local wk = require("which-key")
 
 wk.add({
   {
-    "<leader>fe",
+    "<leader>e",
     function()
       nt.execute({ toggle = true, dir = vim.uv.cwd() })
     end,
     desc = "Explorer NeoTree",
   },
-  { "<leader>e", "<leader>fe", desc = "Explorer NeoTree", remap = true },
+  { "<leader>e", desc = "Explorer NeoTree", remap = true },
   {
     "<leader>ge",
     function()

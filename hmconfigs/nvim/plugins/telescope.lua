@@ -25,5 +25,6 @@ wk.add({
     { "<leader>fr", builtin.lsp_references, desc = "References" },
     { "<leader>fc", builtin.commands, desc = "Commands" },
     { "<leader>fq", builtin.diagnostics, desc = "Diagnostics" },
+    { "<leader>fe", ':TodoTelescope<CR>', desc = "Todos" },
 		{ "<leader>fn",':Telescope noice<CR>', { desc = 'Telescope Noice' } },
 })

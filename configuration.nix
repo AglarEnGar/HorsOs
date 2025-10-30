@@ -108,6 +108,12 @@
     LC_CTYPE = "en_US.utf8"; # required by dmenu don't change this
   };
 
+	nix.gc = {
+    automatic = true;
+    randomizedDelaySec = "14m";
+    options = "--delete-older-than 30d";
+  };
+
   # find my desktop managers
   services = {
     xserver = {
@@ -236,6 +242,7 @@
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHmdKF4/iYZFKSVXlJUl/6o6K9lF9ul3ToKp450mSYmU luca.j.morgan@gmail.com" # laptop
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO9oYLYzCVdTnxWcT7oZWhJYU/xNNAfGyzkapJxK4n3s u0_a390@localhost" # phone
+			"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDT61bhC2Q7odvPaD0PxnEMHWM9iLEGoAtbWvq5OhXdNaTb5Vymi4pTV/zCaOuog2OZ375KCCdnjHEZWXsbjNwynA3UURlh4ZILR9/U7RrfVN20jZZRzbW5RRo+wE1VBWK0/3oJueQvNXY0xX4gbKbd6ZIDrUsIaNPGtPVJMsb9enfscV9xy7QdnjIHtq1S2iiaA6sZiywrCIdscULdqZmDvqieDJoxhHO56Dq+Oh8/qyMdFLIO1vDLmr9FrRxHxk1Bfmmn4x57FdAyg35IBWqKaF3YPENbY+NuBZUTEK4nq0jwI81gDcQrY15C6ihvlZ2CUxduUNS/wJTg9WIQvWJR63lXue3GZ1dDq69mVReHDeVmkFhCQC9YciasepmsB/Suqe/jEA4Pb4OqpCgcWPc+cU6aJYiki9rrFTrW/DN+wZizMGUAZ49+p2P6AU+ZvuiYhFUFsiqk/R2+pI0+gqOtEkO0sYtRkVSDtEt5QLMUaxN0TKEWSBFC5Cy4OneG2gk= nick@debian" # debian virtual machine
     ];
   };
 
@@ -274,6 +281,8 @@
 
   # Find my packages
   environment.systemPackages = with pkgs; [
+		p7zip
+		opensnitch-ui
     gitFull
     blender-hip
     net-tools
@@ -359,6 +368,7 @@
     neovim
     unrar
     unzip
+		zip
     lshw
     traceroute
     dig

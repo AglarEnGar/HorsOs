@@ -77,6 +77,16 @@ vim.keymap.set('n', '<M-o>', function() vim.cmd('LspCclsSwitchSourceHeader') end
 -- make format on write off by default
 vim.g.disable_autoformat = true
 
+-- keybinds for tagging
+vim.keymap.set("n", "]t", function()
+  require("todo-comments").jump_next()
+end, { desc = "Next todo comment" })
+
+vim.keymap.set("n", "[t", function()
+  require("todo-comments").jump_prev()
+end, { desc = "Previous todo comment" })
+
+
 -- Keybinds to make split navigation easier.
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
