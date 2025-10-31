@@ -8,6 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     ./zsh.nix
+		./swapStuff.nix
   ];
   nix.settings.warn-dirty = false;
 
@@ -449,12 +450,6 @@
 
   # flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
-  swapDevices = [
-    {
-      device = "/var/lib/swapfile";
-      size = 16 * 1024;
-    }
-  ];
 
   # enable home manager
   home-manager = {
