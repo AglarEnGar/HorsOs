@@ -58,8 +58,9 @@
       "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "impress.desktop";
 
       # Pictures
-      "image/png" = "krita_png.desktop";
-      "image/jpeg" = "krita_jpeg.desktop";
+      "image/png" = "org.xfce.ristretto.desktop";
+      "image/jpeg" = "org.xfce.ristretto.desktop";
+			"image/webp" = "org.xfce.ristretto.desktop";
     };
   };
 

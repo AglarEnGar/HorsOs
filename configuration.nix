@@ -59,9 +59,15 @@
   programs.virt-manager.enable = true;
 
   # Drivers settings
-  hardware.graphics = {
-    enable = true;
-  };
+	hardware = {
+		amdgpu.opencl.enable = true;
+		graphics.extraPackages = with pkgs; [
+			rocmPackages.clr.icd
+		];
+		graphics = {
+			enable = true;
+		};
+	};
   systemd.packages = with pkgs; [lact];
   systemd.services.lactd.wantedBy = ["multi-user.target"];
 
@@ -272,6 +278,10 @@
   #};
 
   services.mullvad-vpn.enable = true;
+	services.tor = {
+		enable = true;
+		openFirewall = true;
+	};
 
   # flatpak enable
   xdg.portal = {
@@ -290,7 +300,7 @@
     godot
     mullvad-vpn
     cataclysm-dda-git
-    # libsForQt5.xp-pen-deco-01-v2-driver
+    libsForQt5.xp-pen-deco-01-v2-driver
     tasktimer
     whois
     r2modman
@@ -300,7 +310,6 @@
     qbittorrent
     dnscrypt-proxy
     calcurse
-    llvmPackages.clangUseLLVM
     nvtopPackages.amd
     qalculate-qt
     clang-tools
@@ -329,7 +338,7 @@
     bear
     valgrind
     gdb
-    btop
+		(btop.override { rocmSupport = true; })
     tree
     calibre
     mangohud
