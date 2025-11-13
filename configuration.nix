@@ -28,19 +28,19 @@
 
   programs.obs-studio = {
     enable = true;
-    package = pkgs.obs-studio.overrideAttrs (old: {
-      src = pkgs.fetchFromGitHub {
-        owner = "obsproject";
-        repo = "obs-studio";
-        rev = "31.1.0-beta1";
-        hash = "sha256-7RjE5gVinj3HlNSEwegmq64O8luQSgTV3UEZ26a7uHQ="; # fill this in when you get a build failure
-        fetchSubmodules = true;
-      };
-      patches = [
-        ./fix-nix-plugin-path.patch
-      ];
-      nativeBuildInputs = old.nativeBuildInputs ++ [pkgs.extra-cmake-modules];
-    });
+    # package = pkgs.obs-studio.overrideAttrs (old: {
+    #   src = pkgs.fetchFromGitHub {
+    #     owner = "obsproject";
+    #     repo = "obs-studio";
+    #     rev = "31.1.0-beta1";
+    #     hash = "sha256-7RjE5gVinj3HlNSEwegmq64O8luQSgTV3UEZ26a7uHQ="; # fill this in when you get a build failure
+    #     fetchSubmodules = true;
+    #   };
+    #   patches = [
+    #     ./fix-nix-plugin-path.patch
+    #   ];
+    #   nativeBuildInputs = old.nativeBuildInputs ++ [pkgs.extra-cmake-modules];
+    # });
     plugins = with pkgs.obs-studio-plugins; [
       obs-pipewire-audio-capture
       obs-vkcapture
@@ -254,15 +254,15 @@
   };
 
   # Printer setup and cofig
-  services.printing.enable = true;
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-  };
-  services.printing.drivers = [
-    pkgs.brlaser
-  ];
+  # services.printing.enable = true;
+  # services.avahi = {
+  #   enable = true;
+  #   nssmdns4 = true;
+  #   openFirewall = true;
+  # };
+  # services.printing.drivers = [
+  #   pkgs.brlaser
+  # ];
   #hardware.printers = {
   #  ensurePrinters = [
   #    {
@@ -312,7 +312,6 @@
     calcurse
     nvtopPackages.amd
     qalculate-qt
-    clang-tools
     python3
     maim
     scrot
