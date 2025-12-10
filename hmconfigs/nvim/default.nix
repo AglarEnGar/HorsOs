@@ -1,0 +1,172 @@
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: {
+  nixpkgs.overlays = [
+    (final: prev: {
+      ccls = inputs.nixpkgs-pr.legacyPackages.${final.system}.ccls;
+    })
+  ];
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+
+    extraLuaConfig = builtins.readFile ./init.lua;
+
+    plugins = with pkgs.vimPlugins; [
+      # evil lsp config
+      # {
+      #   plugin = nvim-java;
+      #   type = "lua";
+      #   config = builtins.readFile ./plugins/java.lua;
+      # }
+
+      {
+        plugin = nvim-lspconfig;
+        type = "lua";
+        config = builtins.readFile ./plugins/lspconfig.lua;
+      }
+
+      # Completions
+      {
+        plugin = nvim-cmp;
+        type = "lua";
+        config = builtins.readFile ./plugins/cmp.lua;
+      }
+      cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
+      cmp_luasnip
+      luasnip
+
+      # Surround my lines
+      {
+        plugin = nvim-surround;
+        type = "lua";
+        config = builtins.readFile ./plugins/surround.lua;
+      }
+      comment-nvim
+      presence-nvim
+
+      # Grab my lines :)
+      {
+        plugin = nvim-gomove;
+        type = "lua";
+        config = builtins.readFile ./plugins/gomove.lua;
+      }
+
+      # Formatting
+      {
+        plugin = conform-nvim;
+        type = "lua";
+        config = builtins.readFile ./plugins/conform.lua;
+      }
+      nvim-treesitter.withAllGrammars
+      {
+        plugin = nvim-treesitter;
+        type = "lua";
+        config = builtins.readFile ./plugins/treesitter.lua;
+      }
+
+      # Editor
+      which-key-nvim
+      nvim-web-devicons
+      {
+        plugin = todo-comments-nvim;
+        type = "lua";
+        config = builtins.readFile ./plugins/todos.lua;
+      }
+
+      #	{
+      #	  plugin = flash-nvim;
+      #	  type = "lua";
+      #	  config = builtins.readFile ./plugins/flash-nvim.lua;
+      #	}
+      {
+        plugin = neo-tree-nvim;
+        type = "lua";
+        config = builtins.readFile ./plugins/neo-tree.lua;
+      }
+      {
+        plugin = oil-nvim;
+        type = "lua";
+        config = builtins.readFile ./plugins/oil.lua;
+      }
+      {
+        plugin = telescope-nvim;
+        type = "lua";
+        config = builtins.readFile ./plugins/telescope.lua;
+      }
+
+      # decoration
+      {
+        plugin = catppuccin-nvim;
+        type = "lua";
+        config = "vim.cmd.colorscheme 'catppuccin'";
+      }
+      {
+        plugin = lualine-nvim;
+        type = "lua";
+        config = builtins.readFile ./plugins/lualine.lua;
+      }
+      {
+        plugin = noice-nvim;
+        type = "lua";
+        config = builtins.readFile ./plugins/noice.lua;
+      }
+
+      #	# Copilot
+      #	{
+      #	  plugin = copilot-lua;
+      #	  type = "lua";
+      #	  config = builtins.readFile ./plugins/copilot.lua;
+      #	}
+      #	CopilotChat-nvim
+      #	plenary-nvim # for CopilotChat-nvim
+      #	copilot-lualine
+      #
+      #
+      #	# Misc
+      vimtex
+    ];
+    #
+
+    # All the language servers
+    extraPackages = with pkgs; [
+      lua-language-server
+
+      # Nix
+      nixd
+      alejandra
+
+      # C, C++
+      cmake-language-server
+      cppcheck
+      ccls
+
+      # .NET
+      omnisharp-roslyn
+
+      # python
+      pyright
+
+      # javascript and webdev
+      typescript-language-server
+      biome
+
+      # Shell scripting
+      shfmt
+      shellcheck
+
+      # Telescope dependencies
+      ripgrep
+      fd
+    ];
+  };
+}
