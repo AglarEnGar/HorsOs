@@ -1,8 +1,15 @@
 {
   lib,
   pkgs,
+  inputs,
   ...
 }: {
+  nixpkgs.overlays = [
+    (final: prev: {
+      ccls = inputs.nixpkgs-pr.legacyPackages.${final.system}.ccls;
+    })
+  ];
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -70,11 +77,11 @@
       # Editor
       which-key-nvim
       nvim-web-devicons
-			{
-			 plugin = todo-comments-nvim;
-			 type = "lua";
-			 config = builtins.readFile ./plugins/todos.lua;
-			}
+      {
+        plugin = todo-comments-nvim;
+        type = "lua";
+        config = builtins.readFile ./plugins/todos.lua;
+      }
 
       #	{
       #	  plugin = flash-nvim;
@@ -97,7 +104,7 @@
         config = builtins.readFile ./plugins/telescope.lua;
       }
 
-			# decoration
+      # decoration
       {
         plugin = catppuccin-nvim;
         type = "lua";
@@ -129,6 +136,7 @@
       vimtex
     ];
     #
+
     # All the language servers
     extraPackages = with pkgs; [
       lua-language-server
@@ -137,11 +145,12 @@
       nixd
       alejandra
 
-      # C, C++, C#
+      # C, C++
       cmake-language-server
-      clang-tools
       cppcheck
       ccls
+
+      # .NET
       omnisharp-roslyn
 
       # python

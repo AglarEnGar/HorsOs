@@ -27,4 +27,6 @@ wk.add({
     { "<leader>fq", builtin.diagnostics, desc = "Diagnostics" },
     { "<leader>fe", ':TodoTelescope<CR>', desc = "Todos" },
 		{ "<leader>fn",':Telescope noice<CR>', { desc = 'Telescope Noice' } },
+		{ "<leader>fo", builtin.lsp_document_symbols, { desc = 'Telescope Document Symbols' } },
+
 })

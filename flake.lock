@@ -1,6 +1,6 @@
 {
   "nodes": {
-		"catppuccin": {
+    "catppuccin": {
       "inputs": {
         "nixpkgs": "nixpkgs"
       },
@@ -18,7 +18,7 @@
         "type": "github"
       }
     },
-		"home-manager": {
+    "home-manager": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -54,6 +54,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-pr": {
+      "locked": {
+        "lastModified": 1762758762,
+        "narHash": "sha256-0qwSQZpYVSxM32Cke7yboEKvvy855ly1wbMijz3Q24g=",
+        "owner": "tobim",
+        "repo": "nixpkgs",
+        "rev": "8f02ad0cd20685888ed41d05774cf1673cd9781b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tobim",
+        "ref": "pkgs/ccls-0.20250815",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1762844143,
@@ -74,7 +90,8 @@
       "inputs": {
         "catppuccin": "catppuccin",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "nixpkgs-pr": "nixpkgs-pr"
       }
     }
   },

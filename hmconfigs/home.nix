@@ -60,7 +60,8 @@
       # Pictures
       "image/png" = "org.xfce.ristretto.desktop";
       "image/jpeg" = "org.xfce.ristretto.desktop";
-			"image/webp" = "org.xfce.ristretto.desktop";
+      "image/webp" = "org.xfce.ristretto.desktop";
+			"image/svg+xml" = "org.xfce.ristretto.desktop";
     };
   };
 

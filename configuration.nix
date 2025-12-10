@@ -8,7 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     ./zsh.nix
-		./swapStuff.nix
+    ./swapStuff.nix
   ];
   nix.settings.warn-dirty = false;
 
@@ -28,19 +28,6 @@
 
   programs.obs-studio = {
     enable = true;
-    # package = pkgs.obs-studio.overrideAttrs (old: {
-    #   src = pkgs.fetchFromGitHub {
-    #     owner = "obsproject";
-    #     repo = "obs-studio";
-    #     rev = "31.1.0-beta1";
-    #     hash = "sha256-7RjE5gVinj3HlNSEwegmq64O8luQSgTV3UEZ26a7uHQ="; # fill this in when you get a build failure
-    #     fetchSubmodules = true;
-    #   };
-    #   patches = [
-    #     ./fix-nix-plugin-path.patch
-    #   ];
-    #   nativeBuildInputs = old.nativeBuildInputs ++ [pkgs.extra-cmake-modules];
-    # });
     plugins = with pkgs.obs-studio-plugins; [
       obs-pipewire-audio-capture
       obs-vkcapture
@@ -59,15 +46,15 @@
   programs.virt-manager.enable = true;
 
   # Drivers settings
-	hardware = {
-		amdgpu.opencl.enable = true;
-		graphics.extraPackages = with pkgs; [
-			rocmPackages.clr.icd
-		];
-		graphics = {
-			enable = true;
-		};
-	};
+  hardware = {
+    amdgpu.opencl.enable = true;
+    graphics.extraPackages = with pkgs; [
+      rocmPackages.clr.icd
+    ];
+    graphics = {
+      enable = true;
+    };
+  };
   systemd.packages = with pkgs; [lact];
   systemd.services.lactd.wantedBy = ["multi-user.target"];
 
@@ -82,18 +69,44 @@
     networkmanager.enable = true;
   };
   programs.traceroute.enable = true;
-  services.resolved.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
+  services.resolved = {
+    enable = true;
+    # dnssec = "true";
+    # domains = ["~."];
+    # fallbackDns = [
+    #   "1.1.1.1"
+    #   "1.0.0.1"
+    # ];
+    # dnsovertls = "true";
+  };
+
   programs.ssh = {
     startAgent = true;
   };
   services.openssh = {
     enable = true;
-    ports = [5432];
+    ports = [10001];
     settings = {
-      PasswordAuthentication = false;
-      KbdInteractiveAuthentication = false;
+      PasswordAuthentication = true;
+      KbdInteractiveAuthentication = true;
       PermitRootLogin = "no";
+			AllowUsers = [
+				"guest"
+			];
     };
+
+  };
+
+	services.endlessh = {
+    enable = true;
+    port = 22;
+    openFirewall = true;
   };
 
   # Set your time zone.
@@ -115,7 +128,7 @@
     LC_CTYPE = "en_US.utf8"; # required by dmenu don't change this
   };
 
-	nix.gc = {
+  nix.gc = {
     automatic = true;
     randomizedDelaySec = "14m";
     options = "--delete-older-than 30d";
@@ -249,17 +262,74 @@
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHmdKF4/iYZFKSVXlJUl/6o6K9lF9ul3ToKp450mSYmU luca.j.morgan@gmail.com" # laptop
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO9oYLYzCVdTnxWcT7oZWhJYU/xNNAfGyzkapJxK4n3s u0_a390@localhost" # phone
-			"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDT61bhC2Q7odvPaD0PxnEMHWM9iLEGoAtbWvq5OhXdNaTb5Vymi4pTV/zCaOuog2OZ375KCCdnjHEZWXsbjNwynA3UURlh4ZILR9/U7RrfVN20jZZRzbW5RRo+wE1VBWK0/3oJueQvNXY0xX4gbKbd6ZIDrUsIaNPGtPVJMsb9enfscV9xy7QdnjIHtq1S2iiaA6sZiywrCIdscULdqZmDvqieDJoxhHO56Dq+Oh8/qyMdFLIO1vDLmr9FrRxHxk1Bfmmn4x57FdAyg35IBWqKaF3YPENbY+NuBZUTEK4nq0jwI81gDcQrY15C6ihvlZ2CUxduUNS/wJTg9WIQvWJR63lXue3GZ1dDq69mVReHDeVmkFhCQC9YciasepmsB/Suqe/jEA4Pb4OqpCgcWPc+cU6aJYiki9rrFTrW/DN+wZizMGUAZ49+p2P6AU+ZvuiYhFUFsiqk/R2+pI0+gqOtEkO0sYtRkVSDtEt5QLMUaxN0TKEWSBFC5Cy4OneG2gk= nick@debian" # debian virtual machine
     ];
   };
 
+# Create the guest user with restricted access
+  users.users.guest = {
+    isNormalUser = true;
+		hashedPassword = "$y$j9T$POzFaPSuGzXGzrc0p9upq.$e32LRoe9zd7xpJgRhzW4skbJuzrNcwRTTqqZ/TqmZr/";
+    home = "/home/guest";
+		createHome = true;
+		group = "repository";
+    shell = pkgs.bashInteractive;
+  };
+
+	users.groups.repository = {};
+
+  # 1. SSH Config
+  services.openssh.extraConfig = ''
+    Match User guest
+      ChrootDirectory /var/jail
+  '';
+
+	fileSystems."/var/jail/run/current-system/sw/bin" = {
+    device = "/run/current-system/sw/bin";
+    options = [ "bind" "ro" ];
+  };
+
+  # 2. Set up the Jail Filesystem
+  # We use fileSystems to bind mount the Nix store and essential paths
+  fileSystems."/var/jail/nix/store" = {
+    device = "/nix/store";
+    options = [ "bind" "ro" ];
+  };
+
+  fileSystems."/var/jail/bin" = {
+    device = "/run/current-system/sw/bin";
+    options = [ "bind" "ro" ];
+  };
+
+	fileSystems."/var/jail/proc" = {
+		device = "proc";
+		fsType = "proc";
+		options = [ "nosuid" "noexec" "nodev" ];
+	};
+
+  # 3. Create necessary directories and symlinks
+  systemd.tmpfiles.rules = [
+    # The jail root must be root:root 755
+    "d /var/jail 0755 root root - -"
+		"d /var/jail/run/current-system/sw/bin 0755 root root - -"
+		"d /var/jail/proc 0555 root root - -"
+    "d /var/jail/nix/store 0755 root root - -"
+    "d /var/jail/bin 0755 root root - -"
+		"d /var/jail/tmp 1777 root root - -"
+
+		# make the home
+    "d /var/jail/home/guest 0700 guest repository - -"
+    
+    # Optional: If you need /dev (often needed for interactive shells)
+    "d /var/jail/dev 0755 root root - -"
+		"c /var/jail/dev/null    0666 root root - 1:3"
+		"c /var/jail/dev/zero    0666 root root - 1:5"
+		"c /var/jail/dev/tty     0666 root root - 5:0"
+		"c /var/jail/dev/urandom 0666 root root - 1:9"
+		"c /var/jail/dev/random  0666 root root - 1:8"
+  ];
+
   # Printer setup and cofig
   # services.printing.enable = true;
-  # services.avahi = {
-  #   enable = true;
-  #   nssmdns4 = true;
-  #   openFirewall = true;
-  # };
   # services.printing.drivers = [
   #   pkgs.brlaser
   # ];
@@ -278,10 +348,10 @@
   #};
 
   services.mullvad-vpn.enable = true;
-	services.tor = {
-		enable = true;
-		openFirewall = true;
-	};
+  services.tor = {
+    enable = true;
+    openFirewall = true;
+  };
 
   # flatpak enable
   xdg.portal = {
@@ -290,10 +360,14 @@
   };
   services.flatpak.enable = true;
 
+
+
   # Find my packages
   environment.systemPackages = with pkgs; [
-		p7zip
-		opensnitch-ui
+		postgresql
+    dropbox
+    p7zip
+    opensnitch-ui
     gitFull
     blender-hip
     net-tools
@@ -337,7 +411,7 @@
     bear
     valgrind
     gdb
-		(btop.override { rocmSupport = true; })
+    (btop.override {rocmSupport = true;})
     tree
     calibre
     mangohud
@@ -377,7 +451,7 @@
     neovim
     unrar
     unzip
-		zip
+    zip
     lshw
     traceroute
     dig
@@ -394,6 +468,7 @@
     cmake
     xorg.xmodmap
     inxi
+		psmisc
   ];
 
   services.udev = {
@@ -461,7 +536,9 @@
 
   # enable home manager
   home-manager = {
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = {
+      inherit inputs;
+    };
     users = {
       "nickd" = import ./hmconfigs/home.nix;
     };

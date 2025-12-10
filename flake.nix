@@ -8,6 +8,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs-pr.url = "github:tobim/nixpkgs/pkgs/ccls-0.20250815";
   };
 
   outputs = {
@@ -16,7 +17,10 @@
     ...
   } @ inputs: {
     nixosConfigurations.HorsOs = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
+      specialArgs = {
+        inherit inputs;
+      };
+
       modules = [
         ./configuration.nix
         inputs.catppuccin.nixosModules.catppuccin
