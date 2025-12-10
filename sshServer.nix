@@ -106,12 +106,13 @@
   services.ddclient = {
     enable = true;
     username = "mw75vc5";
-    passwordFile = "/etc/nixos/passwd.txt";
+    # passwordFile = "/etc/nixos/passwd.txt";
     protocol = "noip";
+		services.ddclient.ssl = true;
     extraConfig = ''
       use=web
-      ssl=yes
       daemon=300
+			password=2bKWGmEEfQsR
     '';
     domains = [
       "sourcecontrol.myftp.org"
