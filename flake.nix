@@ -9,6 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs-pr.url = "github:tobim/nixpkgs/pkgs/ccls-0.20250815";
+		nix-gaming.url = "github:fufexan/nix-gaming";
   };
 
   outputs = {
