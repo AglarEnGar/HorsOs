@@ -103,19 +103,19 @@
     "c /var/jail/dev/ptmx 0666 root root - 5:2"
   ];
 
-  services.ddclient = {
-    enable = true;
-    username = "mw75vc5";
-    # passwordFile = "/etc/nixos/passwd.txt";
-    protocol = "noip";
-		services.ddclient.ssl = true;
-    extraConfig = ''
-      use=web
-      daemon=300
-			password=2bKWGmEEfQsR
-    '';
-    domains = [
-      "sourcecontrol.myftp.org"
-    ];
-  };
+  # services.ddclient = {
+  #   enable = true;
+  #   username = "mw75vc5";
+  #   # passwordFile = "/etc/nixos/passwd.txt";
+  #   protocol = "noip";
+  # services.ddclient.ssl = true;
+  #   extraConfig = ''
+  #     use=web
+  #     daemon=300
+  # 	password=2bKWGmEEfQsR
+  #   '';
+  #   domains = [
+  #     "sourcecontrol.myftp.org"
+  #   ];
+  # };
 }

@@ -10,6 +10,7 @@
     ./zsh.nix
     ./swapStuff.nix
     ./sshServer.nix
+		./starCit.nix
   ];
   nix.settings.warn-dirty = false;
 
@@ -277,7 +278,6 @@
 
   # Find my packages
   environment.systemPackages = with pkgs; [
-    ddclient
     postgresql
     dropbox
     p7zip
