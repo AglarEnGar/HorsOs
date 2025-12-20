@@ -10,7 +10,7 @@
     ./zsh.nix
     ./swapStuff.nix
     ./sshServer.nix
-		./starCit.nix 
+		./starCit.nix
 	];
   nix.settings.warn-dirty = false;
 
