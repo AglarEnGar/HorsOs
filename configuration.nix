@@ -246,9 +246,9 @@
       vesktop
       firefox
       xarchiver
-			(inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.star-citizen.override {
-				tricks = [ "arial" "vcrun2019" "win10" "sound=alsa" ];
-			})
+			# (inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.star-citizen.override {
+			# 	tricks = [ "arial" "vcrun2019" "win10" "sound=alsa" ];
+			# })
     ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHmdKF4/iYZFKSVXlJUl/6o6K9lF9ul3ToKp450mSYmU luca.j.morgan@gmail.com" # laptop
