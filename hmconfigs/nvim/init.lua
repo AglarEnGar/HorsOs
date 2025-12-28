@@ -97,3 +97,5 @@ vim.keymap.set('n', '<M-,>', '<c-w>5<')
 vim.keymap.set('n', '<M-.>', '<c-w>5>')
 vim.keymap.set('n', '<M-t>', '<c-w>5+')
 vim.keymap.set('n', '<M-s>', '<c-w>5-')
+
+vim.keymap.set('n', 'gn', ':tabnew .<CR>', { desc = 'Make new tab' })
