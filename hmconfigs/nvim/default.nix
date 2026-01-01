@@ -45,6 +45,11 @@
       cmp_luasnip
       luasnip
 
+      {
+        plugin = indent-blankline-nvim;
+        type = "lua";
+        config = builtins.readFile ./plugins/blankline.lua;
+      }
       # Surround my lines
       {
         plugin = nvim-surround;
