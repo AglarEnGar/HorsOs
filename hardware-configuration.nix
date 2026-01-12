@@ -43,10 +43,10 @@
   };
 
   # the old drive
-  fileSystems."/mnt/old" = {
-    device = "/dev/disk/by-uuid/2de73410-a5a7-4905-8e5d-798a39bd86d4";
-    fsType = "ext4";
-  };
+  #fileSystems."/mnt/old" = {
+  #  device = "/dev/disk/by-uuid/2de73410-a5a7-4905-8e5d-798a39bd86d4";
+  #  fsType = "ext4";
+  #};
 
   # the reaper drive
   fileSystems."/home/nickd/ReaperDrive" = {
