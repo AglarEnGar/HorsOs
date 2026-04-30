@@ -280,12 +280,21 @@
   };
   services.flatpak.enable = true;
 
+  boot.kernel.sysctl = {
+    "vm.max_map_count" = 16777216;
+    "fs.file-max" = 524288;
+  };
+
   # Find my packages
   environment.systemPackages = with pkgs; [
+		javaPackages.compiler.temurin-bin.jre-25
+		prismlauncher
 		unityhub
 		spotifywm
 		soco-cli
-		inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.star-citizen
+		(inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.star-citizen.override {
+			tricks = [ "arial" "vcrun2019" "win10" "sound=alsa" ];
+		})
     postgresql
     dropbox
     p7zip
