@@ -9,9 +9,10 @@
     ./hardware-configuration.nix
     ./zsh.nix
     ./swapStuff.nix
-    ./sshServer.nix
+    # ./sshServer.nix
 	];
   nix.settings.warn-dirty = false;
+
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -26,6 +27,8 @@
 
   # Gpu stuff
   boot.initrd.kernelModules = ["amdgpu"];
+	# boot.initrd.systemd.network.wait-online.enable = false;
+
 
   programs.obs-studio = {
     enable = true;
@@ -58,6 +61,9 @@
   };
   systemd.packages = with pkgs; [lact];
   systemd.services.lactd.wantedBy = ["multi-user.target"];
+	# systemd.network.wait-online.enable = false;
+	systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
+
 
   # Networko
   networking = {
