@@ -9,10 +9,10 @@
     ./hardware-configuration.nix
     ./zsh.nix
     ./swapStuff.nix
+		./nixos.nix
     # ./sshServer.nix
-	];
+  ];
   nix.settings.warn-dirty = false;
-
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -27,8 +27,7 @@
 
   # Gpu stuff
   boot.initrd.kernelModules = ["amdgpu"];
-	# boot.initrd.systemd.network.wait-online.enable = false;
-
+  # boot.initrd.systemd.network.wait-online.enable = false;
 
   programs.obs-studio = {
     enable = true;
@@ -61,9 +60,8 @@
   };
   systemd.packages = with pkgs; [lact];
   systemd.services.lactd.wantedBy = ["multi-user.target"];
-	# systemd.network.wait-online.enable = false;
-	systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
-
+  # systemd.network.wait-online.enable = false;
+  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   # Networko
   networking = {
@@ -152,13 +150,13 @@
             while [ ! -e /tmp/.X11-unix/X0 ]; do sleep 0.1; done
 
             # Set primary display (replace HDMI-1 with your actual primary monitor)
-            ${pkgs.xorg.xrandr}/bin/xrandr --output DisplayPort-1 --primary
+            ${pkgs.xrandr}/bin/xrandr --output DisplayPort-1 --primary
 
             # Disable other displays (replace DP-1 with your secondary monitor)
-            ${pkgs.xorg.xrandr}/bin/xrandr --output DisplayPort-0 --off
+            ${pkgs.xrandr}/bin/xrandr --output DisplayPort-0 --off
 
             # Disable other displays (replace DP-1 with your secondary monitor)
-            ${pkgs.xorg.xrandr}/bin/xrandr --output HDM1-A-1 --off
+            ${pkgs.xrandr}/bin/xrandr --output HDM1-A-1 --off
           ''}
         '';
       };
@@ -202,7 +200,7 @@
     enable = true;
   };
 
-  environment.xfce.excludePackages = with pkgs.xfce; [
+  environment.xfce.excludePackages = with pkgs; [
     xfce4-taskmanager
     xfce4-terminal
     xfce4-appfinder
@@ -242,6 +240,10 @@
       vesktop
       firefox
       xarchiver
+			(inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.star-citizen.override {
+      tricks = ["arial" "vcrun2019" "win11" "sound=alsa"];
+    })
+
     ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHmdKF4/iYZFKSVXlJUl/6o6K9lF9ul3ToKp450mSYmU luca.j.morgan@gmail.com" # laptop
@@ -278,11 +280,11 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-		extraPortals = [
-			pkgs.xdg-desktop-portal-gtk 
-			pkgs.xdg-desktop-portal-xapp
-		];
-		config.common."org.freedesktop.impl.portal.Settings" = "gtk";
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-xapp
+    ];
+    config.common."org.freedesktop.impl.portal.Settings" = "gtk";
   };
   services.flatpak.enable = true;
 
@@ -291,27 +293,23 @@
     "fs.file-max" = 524288;
   };
 
-  # Find my packages
+  # Find my packagessysctl
   environment.systemPackages = with pkgs; [
-		javaPackages.compiler.temurin-bin.jre-25
-		prismlauncher
-		unityhub
-		spotifywm
-		soco-cli
-		(inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.star-citizen.override {
-			tricks = [ "arial" "vcrun2019" "win10" "sound=alsa" ];
-		})
+    javaPackages.compiler.temurin-bin.jre-25
+    prismlauncher
+    unityhub
+    spotifywm
+    soco-cli
     postgresql
     dropbox
     p7zip
     opensnitch-ui
     gitFull
-    blender-hip
+    (blender.override {rocmSupport = true;})
     net-tools
     godot
     mullvad-vpn
     cataclysm-dda-git
-    libsForQt5.xp-pen-deco-01-v2-driver
     tasktimer
     whois
     r2modman
@@ -339,7 +337,7 @@
     vlc
     playerctl
     lxappearance
-    xfce.xfce4-clipman-plugin
+    xfce4-clipman-plugin
     lightdm-gtk-greeter
     linux-manual
     man-pages
@@ -362,7 +360,7 @@
     krita
     volantes-cursors
     gcc
-    wineWowPackages.stable
+    wineWow64Packages.stable
     jq
     distrobox
     fastfetch
@@ -382,9 +380,7 @@
     pulseaudioFull
     system-config-printer
     webcamoid
-    vim
     tmux
-    neovim
     unrar
     unzip
     zip
@@ -402,7 +398,7 @@
     pciutils
     zoxide
     cmake
-    xorg.xmodmap
+    xmodmap
     inxi
     psmisc
   ];
@@ -452,7 +448,7 @@
     BROWSER = "/etc/profiles/per-user/nickd/bin/firefox";
     EDITOR = "vim";
   };
-	environment.variables = {
+  environment.variables = {
     XDG_CURRENT_DESKTOP = "XFCE";
   };
 

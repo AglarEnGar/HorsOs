@@ -1,14 +1,15 @@
 {
   pkgs,
   config,
+	lib,
   ...
 }: {
   gtk = {
     enable = true;
 
     iconTheme = {
-      name = "Numix-Circle";
-      package = pkgs.numix-icon-theme-circle;
+      name = lib.mkForce "Numix-Circle";
+      package = lib.mkForce pkgs.numix-icon-theme-circle;
     };
 
     cursorTheme = {
@@ -17,18 +18,20 @@
     };
 
     gtk3.extraConfig = {
-			gtk-application-prefer-dark-theme=1;
+  	gtk-application-prefer-dark-theme=1;
     };
 
     gtk4.extraConfig = {
-			gtk-application-prefer-dark-theme=1;
+  	gtk-application-prefer-dark-theme=1;
     };
   };
-  catppuccin.gtk = {
-    enable = true;
-    accent = "lavender";
-    flavor = "macchiato";
-  };
+
+	catppuccin = {
+		enable = true;
+		autoEnable = true;
+		flavor = "macchiato";
+	};
+
 	dconf.settings = {
     "org/freedesktop/appearance" = {
       color-scheme = 1;

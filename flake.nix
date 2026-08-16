@@ -8,8 +8,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs-pr.url = "github:tobim/nixpkgs/pkgs/ccls-0.20250815";
-		nix-gaming.url = "github:fufexan/nix-gaming";
+    nix-gaming.url = "github:fufexan/nix-gaming";
   };
 
   outputs = {
@@ -25,7 +24,21 @@
       modules = [
         ./configuration.nix
         inputs.catppuccin.nixosModules.catppuccin
+				{
+					catppuccin = {
+						enable = true;
+						autoEnable = true;
+						flavor = "macchiato";
+					};
+				}
         inputs.home-manager.nixosModules.home-manager
+        {
+          nixpkgs.config.allowUnfree = true;
+
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = {inherit inputs;};
+        }
       ];
     };
   };

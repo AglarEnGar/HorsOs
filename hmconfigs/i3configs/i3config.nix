@@ -234,6 +234,17 @@
          			bindsym $mod+Shift+KP_Prior move container to workspace number $ws9; workspace number $ws9
          			bindsym $mod+Shift+KP_Insert move container to workspace number $ws10; workspace number $ws10
 
+         # move focused container to workspace
+         			bindsym $mod+Shift+mod2+KP_1 move container to workspace number $ws1; workspace number $ws1   
+         			bindsym $mod+Shift+mod2+KP_2 move container to workspace number $ws2; workspace number $ws2   
+         			bindsym $mod+Shift+mod2+KP_3 move container to workspace number $ws3; workspace number $ws3   
+         			bindsym $mod+Shift+mod2+KP_4 move container to workspace number $ws4; workspace number $ws4   
+         			bindsym $mod+Shift+mod2+KP_5 move container to workspace number $ws5; workspace number $ws5   
+         			bindsym $mod+Shift+mod2+KP_6 move container to workspace number $ws6; workspace number $ws6   
+         			bindsym $mod+Shift+mod2+KP_7 move container to workspace number $ws7; workspace number $ws7   
+         			bindsym $mod+Shift+mod2+KP_8 move container to workspace number $ws8; workspace number $ws8   
+         			bindsym $mod+Shift+mod2+KP_9 move container to workspace number $ws9; workspace number $ws9   
+         			bindsym $mod+Shift+mod2+KP_0 move container to workspace number $ws10; workspace number $ws10 
 
          # reload the configuration file
          			bindsym $mod+Shift+c reload

@@ -21,13 +21,16 @@
   home.homeDirectory = "/home/nickd";
   home.stateVersion = "24.05";
 
+	# fight me
+	home.enableNixpkgsReleaseCheck = false;
+
   # git config
   programs.git = {
     enable = true;
     lfs.enable = true;
-    userName = "AglarEnGar";
-    userEmail = "luca.j.morgan@gmail.com";
-    extraConfig = {
+    settings = {
+			user.name = "AglarEnGar";
+			user.email = "luca.j.morgan@gmail.com";
       init.defaultBranch = "main";
       safe.directory = "/etc/nixos";
     };

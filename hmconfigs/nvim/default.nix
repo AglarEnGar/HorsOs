@@ -4,11 +4,12 @@
   inputs,
   ...
 }: {
-  nixpkgs.overlays = [
-    (final: prev: {
-      ccls = inputs.nixpkgs-pr.legacyPackages.${final.system}.ccls;
-    })
-  ];
+
+  # nixpkgs.overlays = [
+  #   (final: prev: {
+  #     ccls = inputs.nixpkgs-pr.legacyPackages.${final.system}.ccls;
+  #   })
+  # ];
 
   programs.neovim = {
     enable = true;
@@ -17,7 +18,7 @@
     vimAlias = true;
     vimdiffAlias = true;
 
-    extraLuaConfig = builtins.readFile ./init.lua;
+		initLua = builtins.readFile ./init.lua;
 
     plugins = with pkgs.vimPlugins; [
       # evil lsp config
@@ -72,9 +73,8 @@
         type = "lua";
         config = builtins.readFile ./plugins/conform.lua;
       }
-      nvim-treesitter.withAllGrammars
       {
-        plugin = nvim-treesitter;
+        plugin = nvim-treesitter.withAllGrammars;
         type = "lua";
         config = builtins.readFile ./plugins/treesitter.lua;
       }
@@ -140,10 +140,14 @@
       #	# Misc
       vimtex
     ];
-    #
 
+		# stap complain
+		withPython3 = true;
+		withRuby = false;
+		withNodeJs = false;
     # All the language servers
     extraPackages = with pkgs; [
+			luaPackages.tree-sitter-cli
       lua-language-server
 
       # Nix
