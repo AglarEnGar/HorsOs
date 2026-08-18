@@ -374,7 +374,8 @@
     dmenu
     git
     networkmanagerapplet
-    nitrogen
+    # nitrogen
+		feh
     pasystray
     polkit_gnome
     pulseaudioFull

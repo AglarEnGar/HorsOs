@@ -54,7 +54,7 @@
          			exec --no-startup-id nm-applet
 
          # setting initial wallpaper
-         			exec --no-startup-id sleep 1 && nitrogen --restore &
+         			# exec --no-startup-id sleep 1 && nitrogen --restore &
 
          # making i3 restart itself cuz it gets confused
          			exec --no-startup-id sleep 2 && i3 restart
@@ -281,7 +281,7 @@
          		bindsym $mod+r mode "resize"
 
          # exec_always --no-startup-id nitrogen --set-zoom-fill --random ~/Pictures/Wallpapers/
-         			exec_always --no-startup-id nitrogen --restore
+         			# exec_always --no-startup-id nitrogen --restore
 
          # home manager starts this i think I cant figure it out tho
          			exec_always --no-startup-id /etc/nixos/hmconfigs/polybar/launch.sh
@@ -319,7 +319,7 @@
          			gaps inner 10
 
          			for_window [title="Application Finder"] floating enable resize set 640 480
-         			for_window [title="Nitrogen"] floating enable resize set 640 480
+         			# for_window [title="Nitrogen"] floating enable resize set 640 480
     '';
   };
 }

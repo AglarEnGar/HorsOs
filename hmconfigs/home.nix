@@ -15,6 +15,7 @@
     ./kitty.nix
     ./polybar/polybar.nix
     ./eww.nix
+		./wallpaper.nix
   ];
 
   home.username = "nickd";
@@ -69,24 +70,24 @@
   };
 
   # Wallpaper auto loading
-  home.file = {
-    "/.config/nitrogen/bg-saved.cfg".text = ''
-      [xin_1]
-      file=/home/nickd/dotfiles/hmconfigs/images/images.steamusercontent2.jpg
-      mode=5
-      bgcolor=#000000
-
-      [xin_2]
-      file=/home/nickd/dotfiles/hmconfigs/images/images.steamusercontent.jpg
-      mode=5
-      bgcolor=#000000
-
-      [xin_0]
-      file=/home/nickd/dotfiles/hmconfigs/images/kenshi1.jpg
-      mode=5
-      bgcolor=#000000
-    '';
-  };
+  # home.file = {
+  #   "/.config/nitrogen/bg-saved.cfg".text = ''
+  #     [xin_1]
+  #     file=/home/nickd/dotfiles/hmconfigs/images/images.steamusercontent2.jpg
+  #     mode=5
+  #     bgcolor=#000000
+  #
+  #     [xin_2]
+  #     file=/home/nickd/dotfiles/hmconfigs/images/images.steamusercontent.jpg
+  #     mode=5
+  #     bgcolor=#000000
+  #
+  #     [xin_0]
+  #     file=/home/nickd/dotfiles/hmconfigs/images/kenshi1.jpg
+  #     mode=5
+  #     bgcolor=#000000
+  #   '';
+  # };
 
   programs.home-manager.enable = true;
 }
