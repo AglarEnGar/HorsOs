@@ -32,7 +32,7 @@
     settings = {
 			user.name = "AglarEnGar";
 			user.email = "luca.j.morgan@gmail.com";
-      init.defaultBranch = "main";
+      init.defaultBranch = "master";
       safe.directory = "/etc/nixos";
     };
   };
