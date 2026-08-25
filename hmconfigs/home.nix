@@ -18,9 +18,9 @@
 		./wallpaper.nix
   ];
 
-  home.username = "nickd";
-  home.homeDirectory = "/home/nickd";
-  home.stateVersion = "24.05";
+	home.username = "nickd";
+	home.homeDirectory = "/home/nickd";
+	home.stateVersion = "24.05";
 
 	# fight me
 	home.enableNixpkgsReleaseCheck = false;
@@ -89,5 +89,5 @@
   #   '';
   # };
 
-  programs.home-manager.enable = true;
+	programs.home-manager.enable = true;
 }

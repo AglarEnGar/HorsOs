@@ -19,7 +19,7 @@
       			bind-key C-a send-prefix
 
       # reload config file (change file location to your the tmux.conf you want to use)
-      			bind r source-file /home/nickd/.config/tmux/tmux.conf
+      			bind r source-file ~/.config/tmux/tmux.conf
 
       # switch panes using Alt-arrow without prefix
       			bind -n M-Left select-pane -L
