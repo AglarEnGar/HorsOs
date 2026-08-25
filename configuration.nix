@@ -295,6 +295,7 @@
 
   # Find my packagessysctl
   environment.systemPackages = with pkgs; [
+		ffmpeg
     javaPackages.compiler.temurin-bin.jre-25
     prismlauncher
     unityhub
@@ -402,6 +403,7 @@
     xmodmap
     inxi
     psmisc
+		bc
   ];
 
   services.udev = {

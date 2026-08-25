@@ -40,28 +40,6 @@
 ;;(defwidget cal []
 	;;(calendar :halign "center" :valign "center" :class "cal" :show-details true))
 
-
-;;;; User information fetch widget
-
-(defwidget uinfo []
-	(box :class "uinfo" :orientation "v" :space-evenly false :halign "center" :valign "center"
-		(label :style "color: #5e81ac;" :text "HorsOs@Nickd" :halign "center" :valign "center" :wrap "false" :limit-width 25)
-		(label :style "color: #efefef;" :text "⎯⎯⎯⎯⎯⎯⎯⎯" :halign "center" :valign "center" :wrap "false" :limit-width 25) 
-		;; Tags for values
-		(box :orientation "h" :space-evenly "false" :spacing 10
-			(box :orientation "v" :class "fetch" :spacing 2
-				(label :style "font-family: 'archcraft'; color: #b48ead;" :halign "end" :text "")
-				(label :style "color: #ebcb8b;" :halign "end" :text "缾")
-				(label :style "color: #80a0c0;" :halign "end" :text "")
-				(label :style "color: #b48ead;" :halign "end" :text "") ) 
-
-			;; Fetch Values
-			(box :orientation "v"   :class "fetch"
-				(label :style "color: #b48ead;" :halign "start" :text ": ${distro}")
-				(label :style "color: #ebcb8b;" :halign "start" :text ": ${wm}")
-				(label :style "color: #80a0c0;" :halign "start" :text ": ${shell}")
-				(label :style "color: #b48ead;" :halign "start" :text ": ${uptime}") ) ) ) )
-
 ;;;; System Information Widget
 
 (defwidget sys[]

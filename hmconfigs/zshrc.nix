@@ -62,6 +62,17 @@
       ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=cyan,bold
       ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 
+			genproj() {
+				setopt local_options nullglob
+					local files=( "$(pwd)"/*.uproject )
+					if [ ''${#files[@]} -eq 0 ]; then
+						echo "No .uproject file found in $(pwd)" >&2
+							return 1
+							fi
+							~/DEV/UnrealEngine/Engine/Build/BatchFiles/Linux/GenerateProjectFiles.sh \
+							-projectfiles -project="''${files[1]}" -game -engine -progress
+			}
+
       alias aws="aws --no-cli-pager"
       alias ls="lsd"
       eval "$(starship init zsh)"

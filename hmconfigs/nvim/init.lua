@@ -101,6 +101,11 @@ vim.keymap.set('n', '<M-s>', '<c-w>5-')
 vim.keymap.set('n', 'gn', ':tabnew .<CR>', { desc = 'Make new tab' })
 
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { '<filetype>' },
-  callback = function() vim.treesitter.start() end,
+  pattern = '*',
+  callback = function(args)
+    if vim.bo[args.buf].buftype ~= '' then
+      return
+    end
+    pcall(vim.treesitter.start, args.buf)
+  end,
 })
