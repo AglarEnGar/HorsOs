@@ -13,8 +13,8 @@
     };
 
     cursorTheme = {
-      package = pkgs.volantes-cursors;
-      name = "volantes_cursors";
+      package = lib.mkForce pkgs.volantes-cursors;
+      name = lib.mkForce "volantes_cursors";
     };
 
     gtk3.extraConfig = {

@@ -6,6 +6,7 @@
 }: {
   imports = [
     inputs.catppuccin.homeModules.catppuccin
+		./wallpaper.nix
     ./rofi.nix
     ./nvim
     ./i3configs/i3config.nix
@@ -15,7 +16,6 @@
     ./kitty.nix
     ./polybar/polybar.nix
     ./eww.nix
-		./wallpaper.nix
   ];
 
 	home.username = "lucam";
