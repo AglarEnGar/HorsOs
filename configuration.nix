@@ -326,6 +326,7 @@
 
   # Find my packagessysctl
   environment.systemPackages = with pkgs; [
+		acpi
 		ffmpeg
     javaPackages.compiler.temurin-bin.jre-25
     prismlauncher
