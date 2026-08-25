@@ -4,6 +4,7 @@ let
   left   = ./images/images.steamusercontent.jpg;
   center = ./images/images.steamusercontent2.jpg;
   right  = ./images/kenshi1.jpg;
+	main = ./images/hooly.jpg
 in
 {
   home.packages = [ pkgs.feh ];
