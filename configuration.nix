@@ -12,21 +12,22 @@
 		./nixos.nix
     # ./sshServer.nix
   ];
-  nix.settings.warn-dirty = false;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # kernel shitfuckery
   boot.kernelParams = [
     "quiet"
     "libahci.ignore_sss=1"
   ];
+	boot.kernelModules = ["wl" "v4l2loopback"];
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    v4l2loopback
+  ];
 
   # Gpu stuff
-  boot.initrd.kernelModules = ["amdgpu"];
   # boot.initrd.systemd.network.wait-online.enable = false;
 
   programs.obs-studio = {
@@ -38,7 +39,6 @@
     enableVirtualCamera = true;
   };
 
-  boot.kernelModules = ["kvm-amd"];
   security = {
     polkit.enable = true;
     rtkit.enable = true;
@@ -48,20 +48,30 @@
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
-  # Drivers settings
-  hardware = {
-    amdgpu.opencl.enable = true;
-    graphics.extraPackages = with pkgs; [
-      rocmPackages.clr.icd
-    ];
-    graphics = {
-      enable = true;
-    };
+  # Video Card Drivers settings
+  boot.kernelPackages = pkgs.linuxPackages;
+
+  hardware.graphics.enable = true;
+  hardware.nvidia = {
+	  modesetting.enable = true;
+	  powerManagement.enable = true;
+	  powerManagement.finegrained = true;
+	  open = true;
+	  nvidiaSettings = true;
+	  package = config.boot.kernelPackages.nvidiaPackages.stable;
+	  prime = {
+		  offload = {
+			  enable = true;
+			  enableOffloadCmd = true;
+		  };
+		  sync.enable =  false;    
+
+		  # sync.enable = true; # uses gpu LOTS. maybe will be loud. maybe power consumption.
+				      # otheroption sucks penis tho
+		  nvidiaBusId = "PCI:1:0:0";
+		  intelBusId = "PCI:0:2:0";
+	  };
   };
-  systemd.packages = with pkgs; [lact];
-  systemd.services.lactd.wantedBy = ["multi-user.target"];
-  # systemd.network.wait-online.enable = false;
-  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   # Networko
   networking = {
@@ -70,9 +80,13 @@
     #      allowedTCPPorts = [];
     #      allowedUDPPorts = [];
     #    };
-    hostName = "HorsOs";
+    hostName = "horsos"; # Define your hostname.
     networkmanager.enable = true;
   };
+
+  # wireless thingy for connect school
+  networking.networkmanager.wifi.backend = "iwd";
+
   programs.traceroute.enable = true;
   services.avahi = {
     enable = true;
@@ -122,6 +136,7 @@
       xkb.layout = "us";
       xkb.variant = "";
       enable = true;
+  		videoDrivers = ["nvidia"];
       windowManager.i3 = {
         enable = true;
         extraPackages = with pkgs; [
@@ -137,33 +152,16 @@
           enableXfwm = false;
         };
       };
-      videoDrivers = ["amdgpu"];
 
       # The special series of scripts that run before login to make sure its on
-      # the right monitor
       displayManager.lightdm = {
         enable = true;
-        extraSeatDefaults = ''
-          display-setup-script=${pkgs.writeScript "lightdm-display-setup" ''
-            #!/bin/sh
-            # Wait for X to be ready (LightDM runs this automatically, but just in case)
-            while [ ! -e /tmp/.X11-unix/X0 ]; do sleep 0.1; done
-
-            # Set primary display (replace HDMI-1 with your actual primary monitor)
-            ${pkgs.xrandr}/bin/xrandr --output DisplayPort-1 --primary
-
-            # Disable other displays (replace DP-1 with your secondary monitor)
-            ${pkgs.xrandr}/bin/xrandr --output DisplayPort-0 --off
-
-            # Disable other displays (replace DP-1 with your secondary monitor)
-            ${pkgs.xrandr}/bin/xrandr --output HDM1-A-1 --off
-          ''}
-        '';
       };
+
       # the goofy login menu
       displayManager.lightdm.greeters.mini = {
         enable = true;
-        user = "nickd";
+        user = "lucam";
         extraConfig = ''
           [greeter]
           show-password-label = false
@@ -177,10 +175,8 @@
           layout-space = 10
         '';
       };
-      xrandrHeads = [
-        "DP-2"
-      ];
     };
+
     displayManager = {
       defaultSession = "xfce+i3";
     };
@@ -193,11 +189,27 @@
         support32Bit = true;
       };
       pulse.enable = true;
+			  #sound card shitfuckery
+			extraConfig.pipewire-pulse."92-low-latency" = {
+				"context.properties" = [
+				{
+					name = "libpipewire-module-protocol-pulse";
+					args = {};
+				}
+				];
+				"pulse.properties" = {
+					"pulse.min.req" = "512/48000";
+					"pulse.default.req" = "512/48000";
+					"pulse.max.req" = "512/48000";
+					"pulse.min.quantum" = "512/48000";
+					"pulse.max.quantum" = "512/48000";
+				};
+				"stream.properties" = {
+					"node.latency" = "512/48000";
+					"resample.quality" = 1;
+				};
+			};
     };
-  };
-
-  services.autorandr = {
-    enable = true;
   };
 
   environment.xfce.excludePackages = with pkgs; [
@@ -218,7 +230,7 @@
       inactive-opacity = 0.8;
       active-opacity = 1.0;
       opacity-rule = [
-        "95:class_g = 'kitty' && focused"
+        "98:class_g = 'kitty' && focused"
         "85:class_g = 'kitty' && !focused"
       ];
     };
@@ -230,20 +242,17 @@
       pulseaudio = true;
     };
   };
+  services.pulseaudio.enable = false;
 
   # Users
-  users.users.nickd = {
+  users.users.lucam = {
     isNormalUser = true;
-    description = "Nickd Dyson";
+    description = "Nick Dyson";
     extraGroups = ["networkmanager" "wheel" "wireshark"];
     packages = with pkgs; [
       vesktop
       firefox
       xarchiver
-			(inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.star-citizen.override {
-      tricks = ["arial" "vcrun2019" "win11" "sound=alsa"];
-    })
-
     ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHmdKF4/iYZFKSVXlJUl/6o6K9lF9ul3ToKp450mSYmU luca.j.morgan@gmail.com" # laptop
@@ -320,7 +329,7 @@
     qbittorrent
     dnscrypt-proxy
     calcurse
-    nvtopPackages.amd
+    nvtopPackages.nvidia
     qalculate-qt
     python3
     maim
@@ -448,7 +457,7 @@
   environment.sessionVariables = {
     TERMINAL = "kitty";
     CURSOR_THEME = "volantes_cursors";
-    BROWSER = "/etc/profiles/per-user/nickd/bin/firefox";
+    BROWSER = "/etc/profiles/per-user/lucam/bin/firefox";
     EDITOR = "vim";
   };
   environment.variables = {
@@ -478,7 +487,7 @@
       inherit inputs;
     };
     users = {
-      "nickd" = import ./hmconfigs/home.nix;
+      "lucam" = import ./hmconfigs/home.nix;
     };
   };
 
@@ -486,6 +495,7 @@
     thunar.enable = true;
     dconf.enable = true;
   };
+  services.tumbler.enable = true;
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {

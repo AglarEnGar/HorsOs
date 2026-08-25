@@ -18,8 +18,8 @@
 		./wallpaper.nix
   ];
 
-	home.username = "nickd";
-	home.homeDirectory = "/home/nickd";
+	home.username = "lucam";
+	home.homeDirectory = "/home/lucam";
 	home.stateVersion = "24.05";
 
 	# fight me

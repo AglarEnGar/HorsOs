@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  user = "nickd";
+  user = "lucam";
   flakePath = "/home/${user}/dotfiles";
 in {
   systemd.services = {

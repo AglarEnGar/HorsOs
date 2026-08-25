@@ -41,7 +41,6 @@
 
        # Main bar
        [bar/mexample]
-       monitor = ''${env:MONITOR:DP-2}
        width = 100%
        height = 30pt
        radius = 0
@@ -84,7 +83,6 @@
 
        # side bars
        [bar/example]
-       monitor = ''${env:MONITOR:DP-1}
        width = 100%
        height = 30pt
        radius = 0

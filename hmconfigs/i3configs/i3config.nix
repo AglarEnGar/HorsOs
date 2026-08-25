@@ -174,15 +174,6 @@
          			set $ws9 "9"
          			set $ws10 "10"
 
-         			set $display1 "HDM1-A-1"
-         			set $display2 "DisplayPort-1"
-         			set $display3 "DisplayPort-0"
-
-         # setting defaults for the 3 monitors
-         			workspace 1 output $display1
-         			workspace 2 output $display2
-         			workspace 3 output $display3
-
          # switch to workspace
          			bindsym $mod+mod2+KP_1 workspace number $ws1
          			bindsym $mod+mod2+KP_2 workspace number $ws2

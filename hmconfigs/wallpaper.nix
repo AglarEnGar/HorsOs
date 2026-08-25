@@ -12,7 +12,7 @@ in
   xsession.windowManager.i3.config.startup = [
     {
       # List the wallpapers in order from left-most monitor to right-most monitor
-      command = "${pkgs.feh}/bin/feh --bg-fill ${right} ${left} ${center}";
+      command = "${pkgs.feh}/bin/feh --bg-fill ${right}";
       always = true; # Re-apply when i3 restarts
       notification = false;
     }
