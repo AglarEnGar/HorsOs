@@ -295,8 +295,12 @@
 
   # Find my packagessysctl
   environment.systemPackages = with pkgs; [
+		maven_4
+		temurin-jre-bin-25
+		jetbrains.idea
+		slack-cli
+		slack
 		ffmpeg
-    javaPackages.compiler.temurin-bin.jre-25
     prismlauncher
     unityhub
     spotifywm

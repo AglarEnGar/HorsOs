@@ -60,6 +60,12 @@
       comment-nvim
       presence-nvim
 
+			{
+				plugin = presence-nvim;
+				type = "lua";
+				config = builtins.readFile ./plugins/presence.lua;
+			}
+
       # Grab my lines :)
       {
         plugin = nvim-gomove;
@@ -176,6 +182,10 @@
       # Telescope dependencies
       ripgrep
       fd
+
+			# java evil jvm
+			jdt-language-server
+
     ];
   };
 }
