@@ -237,7 +237,6 @@
     description = "Nickd Dyson";
     extraGroups = ["networkmanager" "wheel" "wireshark"];
     packages = with pkgs; [
-      vesktop
       firefox
       xarchiver
 			(inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.star-citizen.override {
@@ -294,9 +293,10 @@
   };
 
   # Find my packagessysctl
-  environment.systemPackages = with pkgs; [
+	environment.systemPackages = with pkgs; [
+		javaPackages.compiler.temurin-bin.jdk-25
+		vesktop
 		maven_4
-		temurin-jre-bin-25
 		jetbrains.idea
 		slack-cli
 		slack
