@@ -294,6 +294,8 @@
 
   # Find my packagessysctl
 	environment.systemPackages = with pkgs; [
+		claude-code
+		jetbrains-toolbox
 		javaPackages.compiler.temurin-bin.jdk-25
 		vesktop
 		maven_4

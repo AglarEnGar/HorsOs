@@ -50,6 +50,8 @@
       			set -ag status-right "#{E:@catppuccin_status_session}"
       			set -ag status-right "#{E:@catppuccin_status_uptime}"
       			set -g pane-border-style fg=#6668ba
+
+						set -gu message-style
     '';
   };
 }

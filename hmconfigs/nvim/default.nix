@@ -131,6 +131,12 @@
         type = "lua";
         config = builtins.readFile ./plugins/noice.lua;
       }
+			{
+				plugin = claudecode-nvim;
+				type = "lua";
+				config = builtins.readFile ./plugins/claude.lua;
+
+			}
 
       #	# Copilot
       #	{

@@ -44,6 +44,7 @@
     defaultApplications = {
       "inode/directory" = "thunar.desktop";
       "text/html" = "firefox.desktop";
+      "text/markdown" = "nvim.desktop";
       "x-scheme-handler/https" = "firefox.desktop"; # Links
       "x-scheme-handler/http" = "firefox.desktop"; # Links
       "x-scheme-handler/mailto" = "firefox.desktop"; # Links
@@ -57,7 +58,7 @@
       "video/x-matroska" = "vlc.desktop";
       "video/quicktime" = "vlc.desktop";
 
-      "text/plain" = "vim.desktop";
+      "text/plain" = "nvim.desktop";
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "writer.desktop";
       "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "impress.desktop";
 
@@ -68,6 +69,13 @@
 			"image/svg+xml" = "org.xfce.ristretto.desktop";
     };
   };
+	xdg.terminal-exec = {
+    enable = true;
+    settings = {
+      default = [ "kitty.desktop" ];
+    };
+  };
+
 
   # Wallpaper auto loading
   # home.file = {
