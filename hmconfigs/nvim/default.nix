@@ -155,7 +155,7 @@
 			{
 				plugin = quarto-nvim;
 				type = "lua";
-				config = builtins.readFile ./plugin/quarto.lua;
+				config = builtins.readFile ./plugins/quarto.lua;
 			}
     ];
 

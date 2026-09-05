@@ -1,4 +1,6 @@
-require('quarto').setup{
+local quarto = require('quarto')
+local wk = require("which-key")
+quarto.setup({
   debug = false,
   closePreviewOnExit = true,
   lspFeatures = {
@@ -20,10 +22,7 @@ require('quarto').setup{
     -- Takes precedence over `default_method`
     never_run = { 'yaml' }, -- filetypes which are never sent to a code runner
   },
-}
+})
 
-local quarto = require('quarto')
-quarto.setup()
-vim.keymap.set('n', '<leader>qp', quarto.quartoPreview, { silent = true, noremap = true })
-
+vim.keymap.set('n', '<leader>lp', quarto.quartoPreview, { silent = true, noremap = true, desc = "quarto preview"})
 

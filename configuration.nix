@@ -10,6 +10,7 @@
     ./zsh.nix
     ./swapStuff.nix
 		./nixos.nix
+		./fixpandoc.nix
     # ./sshServer.nix
   ];
   nix.settings.warn-dirty = false;

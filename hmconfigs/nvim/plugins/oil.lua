@@ -1,4 +1,5 @@
 local oil = require('oil')
+local wk = require("which-key")
 
 oil.setup({
   skip_confirm_for_simple_edits = true,
@@ -18,3 +19,7 @@ oil.setup({
 })
 
 vim.keymap.set("n", "<Leader>`", "<Cmd>Oil --float<CR>", { desc = "Open file manager" })
+
+wk.add({
+	{ "<leader>l", group = "Notes" }
+})
