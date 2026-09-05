@@ -10,7 +10,6 @@
     ./zsh.nix
     ./swapStuff.nix
 		./nixos.nix
-		./fixpandoc.nix
     # ./sshServer.nix
   ];
   nix.settings.warn-dirty = false;
@@ -295,6 +294,17 @@
     "vm.max_map_count" = 16777216;
     "fs.file-max" = 524288;
   };
+
+	# temp fix
+	nixpkgs.overlays = [
+    (final: prev: {
+      quarto = prev.quarto.overrideAttrs (oldAttrs: {
+        patches = (oldAttrs.patches or [ ]) ++ [
+          ./older-pandoc-compat.patch
+        ];
+      });
+    })
+  ];
 
   # Find my packagessysctl
 	environment.systemPackages = with pkgs; [
