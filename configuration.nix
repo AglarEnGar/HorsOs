@@ -110,10 +110,13 @@
     LC_CTYPE = "en_US.utf8"; # required by dmenu don't change this
   };
 
+	boot.loader.systemd-boot.configurationLimit = 5;
+
   nix.gc = {
     automatic = true;
     randomizedDelaySec = "14m";
-    options = "--delete-older-than 30d";
+		dates = "weekly";
+    options = "--delete-older-than 7d";
   };
 
   # find my desktop managers
@@ -235,7 +238,7 @@
   users.users.nickd = {
     isNormalUser = true;
     description = "Nickd Dyson";
-    extraGroups = ["networkmanager" "wheel" "wireshark"];
+    extraGroups = ["networkmanager" "wheel" "wireshark" "gamemode"];
     packages = with pkgs; [
       firefox
       xarchiver
@@ -294,7 +297,8 @@
 
   # Find my packagessysctl
 	environment.systemPackages = with pkgs; [
-		claude-code
+		quarto
+		antigravity-cli
 		jetbrains-toolbox
 		javaPackages.compiler.temurin-bin.jdk-25
 		vesktop

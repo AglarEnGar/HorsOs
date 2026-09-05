@@ -131,12 +131,11 @@
         type = "lua";
         config = builtins.readFile ./plugins/noice.lua;
       }
-			{
-				plugin = claudecode-nvim;
-				type = "lua";
-				config = builtins.readFile ./plugins/claude.lua;
-
-			}
+			# {
+			# 	plugin = claudecode-nvim;
+			# 	type = "lua";
+			# 	config = builtins.readFile ./plugins/claude.lua;
+			# }
 
       #	# Copilot
       #	{
@@ -150,7 +149,14 @@
       #
       #
       #	# Misc
+
+			# Note taking
       vimtex
+			{
+				plugin = quarto-nvim;
+				type = "lua";
+				config = builtins.readFile ./plugin/quarto.lua;
+			}
     ];
 
 		# stap complain
