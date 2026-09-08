@@ -176,6 +176,9 @@
       # Telescope dependencies
       ripgrep
       fd
+
+			# java evil jvm
+			jdt-language-server
     ];
   };
 }
